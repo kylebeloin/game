@@ -42,6 +42,10 @@ describe(">>> Game", () => {
     window.requestAnimationFrame = jest
       .fn()
       .mockImplementationOnce((cb) => cb());
+    // mock document.querySelector
+    document.querySelector = jest.fn().mockImplementationOnce(() => {
+      return document.createElement("canvas");
+    });
   });
 
   it("should start update loop next frame after awake", () => {
