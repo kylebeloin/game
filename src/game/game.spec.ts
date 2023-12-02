@@ -7,27 +7,21 @@ class C1 implements IComponent {
   public Awake(): void {
     /*...*/
   }
-  public Update(deltaTime: number): void {
-    console.log("C1 Update", deltaTime);
-  }
+  public Update(_: number): void {}
 }
 class C2 implements IComponent {
   public Entity: Game | null = null;
   public Awake(): void {
     /*...*/
   }
-  public Update(deltaTime: number): void {
-    console.log("C2 Update", deltaTime);
-  }
+  public Update(_: number): void {}
 }
 class C3 implements IComponent {
   public Entity: Game | null = null;
   public Awake(): void {
     /*...*/
   }
-  public Update(deltaTime: number): void {
-    console.log("C3 Update", deltaTime);
-  }
+  public Update(_: number): void {}
 }
 // --- ADD --- //
 describe(">>> Game", () => {

@@ -1,5 +1,5 @@
 import { Canvas } from "./canvas";
-import { Vector2D } from "@/utils";
+import { Vector2D, Color } from "@/utils";
 
 describe(">>> Canvas", () => {
   const size = new Vector2D(100, 100);
@@ -30,7 +30,7 @@ describe(">>> Canvas", () => {
     it("should draw and fill the rect", () => {
       const start = new Vector2D(0, 0);
       const size = new Vector2D(10, 10);
-      const color = "#ffff00";
+      const color = new Color(255, 255, 255, 1);
 
       const beginPathSpy = jest.spyOn(canvas.Context, "beginPath");
       const rectSpy = jest.spyOn(canvas.Context, "rect");
@@ -38,10 +38,12 @@ describe(">>> Canvas", () => {
 
       canvas.FillRect(start, size, color);
 
+      const canvasColor = Color.FromHex(canvas.Context.fillStyle.toString());
+
       expect(beginPathSpy).toHaveBeenCalled();
       expect(rectSpy).toHaveBeenCalledWith(start.x, start.y, size.x, size.y);
       expect(fillSpy).toHaveBeenCalled();
-      expect(canvas.Context.fillStyle).toBe(color);
+      expect(canvasColor.AsString() === color.AsString()).toBeTruthy();
     });
 
     it("should clear the rect", () => {
@@ -54,6 +56,40 @@ describe(">>> Canvas", () => {
       canvas.ClearRect(start, size);
 
       expect(spy).toHaveBeenCalledWith(start.x, start.y, size.x, size.y);
+    });
+
+    it("should draw and fill the circle", () => {
+      const center = new Vector2D(0, 0);
+      const radius = 10;
+      const color = new Color(255, 255, 255, 1);
+
+      const beginPathSpy = jest.spyOn(canvas.Context, "beginPath");
+      const arcSpy = jest.spyOn(canvas.Context, "arc");
+      const fillSpy = jest.spyOn(canvas.Context, "fill");
+
+      canvas.FillCircle(center, radius, color);
+
+      const canvasColor = Color.FromHex(canvas.Context.fillStyle.toString());
+
+      expect(beginPathSpy).toHaveBeenCalled();
+      expect(arcSpy).toHaveBeenCalledWith(
+        center.x,
+        center.y,
+        radius,
+        0,
+        Math.PI * 2
+      );
+      expect(fillSpy).toHaveBeenCalled();
+      expect(canvasColor.AsString() === color.AsString()).toBeTruthy();
+    });
+
+    it("should set css style", () => {
+      const zIndex = "1";
+      expect(canvas.Element.style.zIndex).not.toBe<string>(zIndex);
+
+      canvas.SetStyle({ zIndex });
+
+      expect(canvas.Element.style.zIndex).toBe<string>(zIndex);
     });
   });
 });

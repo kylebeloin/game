@@ -11,10 +11,10 @@ export class NodeDrawComponent implements IComponent {
     if (!this.Entity) {
       throw new Error("NodeDrawComponent: Entity is null");
     }
-    this.Draw();
+    this.Clear();
   }
 
-  public Update(deltaTime: number): void {
+  public Update(_: number): void {
     // to implement
     if (!this.Entity) {
       throw new Error("NodeDrawComponent: Entity is null");

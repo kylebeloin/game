@@ -1,4 +1,4 @@
-import { IAwake, Vector2D } from "..";
+import { IAwake, Vector2D, Color } from "..";
 
 export class Canvas implements IAwake {
   private _element: HTMLCanvasElement | null = null;
@@ -20,12 +20,12 @@ export class Canvas implements IAwake {
     return this._ctx;
   }
 
-  public FillRect(start: Vector2D, size: Vector2D, color: string): void {
+  public FillRect(start: Vector2D, size: Vector2D, color: Color): void {
     if (!this._ctx) {
       throw new Error("Canvas: Context is null");
     }
     this._ctx.beginPath();
-    this._ctx.fillStyle = color;
+    this._ctx.fillStyle = color.AsString();
     this._ctx.rect(start.x, start.y, size.x, size.y);
     this._ctx.fill();
   }
@@ -35,6 +35,34 @@ export class Canvas implements IAwake {
       throw new Error("Canvas: Context is null");
     }
     this._ctx.clearRect(start.x, start.y, size.x, size.y);
+  }
+
+  public FillCircle(center: Vector2D, radius: number, color: Color): void {
+    if (!this._ctx) {
+      throw new Error("Canvas: Context is null");
+    }
+
+    this._ctx.beginPath();
+    this._ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+    this._ctx.fillStyle = color.AsString();
+    this._ctx.fill();
+  }
+
+  public SetStyle(style: Partial<CSSStyleDeclaration>): void {
+    if (!this._element) {
+      throw new Error("Canvas: Element is null");
+    }
+    for (const key in style) {
+      if (!Object.hasOwnProperty.call(style, key)) {
+        continue;
+      }
+
+      if (!style[key]) {
+        continue;
+      }
+
+      this._element.style[key] = style[key] as string;
+    }
   }
 
   public Awake(): void {
