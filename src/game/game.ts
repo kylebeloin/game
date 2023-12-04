@@ -1,17 +1,19 @@
 import { Entity } from "@/utils";
-import { Grid } from "@/grid"; // <--- ADD
+import { Grid } from "@/grid";
+import { Team } from "@/team";
+import { Fleet } from "@/fleet";
 
 export class Game extends Entity {
-  public Entities: Array<Entity> = [];
+  private _entities: Array<Entity> = [];
 
   private _lastTimestamp = 0;
 
   public Awake(): void {
     super.Awake();
 
-    this.Entities.push(new Grid());
+    this._entities.push(new Grid(), new Fleet(Team.A), new Fleet(Team.B));
 
-    for (const entity of this.Entities) {
+    for (const entity of this._entities) {
       entity.Awake();
     }
 
@@ -29,7 +31,7 @@ export class Game extends Entity {
     super.Update(deltaTime);
 
     // awake all children
-    for (const entity of this.Entities) {
+    for (const entity of this._entities) {
       entity.Update(deltaTime);
     }
 
