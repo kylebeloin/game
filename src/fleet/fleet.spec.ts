@@ -1,6 +1,6 @@
 import { Fleet, mockFleetFactory } from "@/fleet";
 import { IComponent } from "@/utils";
-import { Ship } from "@/ship";
+import { Ship } from "@/actor";
 import { Settings } from "@/settings";
 
 class C1 implements IComponent {

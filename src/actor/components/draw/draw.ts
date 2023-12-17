@@ -1,5 +1,5 @@
 import { IComponent, Vector2D, CanvasLayer } from "@/utils";
-import { Ship } from "@/ship";
+import { Ship } from "@/actor";
 import { Team } from "@/team";
 import { Settings } from "@/settings";
 

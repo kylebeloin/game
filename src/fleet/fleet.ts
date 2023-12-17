@@ -1,6 +1,6 @@
 import { Entity } from "@/utils";
 import { Team } from "@/team";
-import { Ship } from "@/ship";
+import { Ship } from "@/actor";
 import { Settings } from "@/settings";
 
 export class Fleet extends Entity {

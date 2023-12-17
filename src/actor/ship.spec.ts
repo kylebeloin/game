@@ -1,4 +1,4 @@
-import { Ship, mockShipFactory, ShipDrawComponent } from "@/ship";
+import { Ship, mockShipFactory, ShipDrawComponent } from "@/actor";
 
 describe(">>> Ship", () => {
   let ship: Ship;

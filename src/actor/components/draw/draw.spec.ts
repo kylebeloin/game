@@ -1,5 +1,5 @@
 import { CanvasLayer } from "@/utils";
-import { ShipDrawComponent, mockShipFactory } from "@/ship";
+import { ShipDrawComponent, mockShipFactory } from "@/actor";
 
 describe(">>> Node Ship Component", () => {
   let comp: ShipDrawComponent;
