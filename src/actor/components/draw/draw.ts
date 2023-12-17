@@ -1,10 +1,10 @@
 import { IComponent, Vector2D, CanvasLayer } from "@/utils";
-import { Ship } from "@/actor";
+import { Actor } from "@/actor";
 import { Team } from "@/team";
 import { Settings } from "@/settings";
 
-export class ShipDrawComponent implements IComponent {
-  public Entity: Ship | null = null;
+export class ActorDrawComponent implements IComponent {
+  public Entity: Actor | null = null;
 
   private get Position(): Vector2D {
     return new Vector2D(
@@ -24,14 +24,14 @@ export class ShipDrawComponent implements IComponent {
 
   private Draw(): void {
     if (!this.Entity) {
-      throw new Error("ShipDrawComponent: Entity is null");
+      throw new Error("ActorDrawComponent: Entity is null");
     }
-    const colors = Settings.ships.colors;
+    const colors = Settings.actors.colors;
     const color = this.Entity.Factory.Team === Team.A ? colors.a : colors.b;
 
     CanvasLayer.Foreground.FillCircle(
       this.Position,
-      Settings.ships.radius,
+      Settings.actors.radius,
       color
     );
   }

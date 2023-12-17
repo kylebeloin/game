@@ -1,7 +1,7 @@
 import { Entity } from "@/utils";
 import { Grid } from "@/grid";
 import { Team } from "@/team";
-import { Fleet } from "@/fleet";
+import { Group } from "@/group";
 
 export class Game extends Entity {
   private _entities: Array<Entity> = [];
@@ -11,7 +11,7 @@ export class Game extends Entity {
   public Awake(): void {
     super.Awake();
 
-    this._entities.push(new Grid(), new Fleet(Team.A), new Fleet(Team.B));
+    this._entities.push(new Grid(), new Group(Team.A), new Group(Team.B));
 
     for (const entity of this._entities) {
       entity.Awake();

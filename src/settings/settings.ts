@@ -7,8 +7,8 @@ export const Settings = Object.freeze({
     nodeOffset: 10,
     color: new Color(255, 255, 255, 1),
   },
-  ships: {
-    fleetSize: 5,
+  actors: {
+    groupSize: 5,
     radius: 40,
     colors: {
       a: new Color(187, 222, 251, 1),

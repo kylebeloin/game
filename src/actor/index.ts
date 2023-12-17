@@ -1,3 +1,3 @@
-export * from "./ship";
+export * from "./actor";
 export * from "./components";
-export * from "./ship.mock";
+export * from "./actor.mock";

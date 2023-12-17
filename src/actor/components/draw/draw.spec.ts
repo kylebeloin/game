@@ -1,11 +1,11 @@
 import { CanvasLayer } from "@/utils";
-import { ShipDrawComponent, mockShipFactory } from "@/actor";
+import { ActorDrawComponent, mockActorFactory } from "@/actor";
 
-describe(">>> Node Ship Component", () => {
-  let comp: ShipDrawComponent;
+describe(">>> Node Actor Component", () => {
+  let comp: ActorDrawComponent;
   beforeEach(() => {
-    comp = new ShipDrawComponent();
-    comp.Entity = mockShipFactory();
+    comp = new ActorDrawComponent();
+    comp.Entity = mockActorFactory();
   });
 
   it("should cleanup when awakens", () => {

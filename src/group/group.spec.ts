@@ -1,10 +1,10 @@
-import { Fleet, mockFleetFactory } from "@/fleet";
+import { Group, mockGroupFactory } from "@/group";
 import { IComponent } from "@/utils";
-import { Ship } from "@/actor";
+import { Actor } from "@/actor";
 import { Settings } from "@/settings";
 
 class C1 implements IComponent {
-  public Entity: Fleet | null = null;
+  public Entity: Group | null = null;
   public Awake(): void {
     /*...*/
   }
@@ -14,7 +14,7 @@ class C1 implements IComponent {
 }
 
 class C2 implements IComponent {
-  public Entity: Fleet | null = null;
+  public Entity: Group | null = null;
   public Awake(): void {
     /*...*/
   }
@@ -23,14 +23,14 @@ class C2 implements IComponent {
   }
 }
 
-describe(">>> Fleet", () => {
-  let fleet: Fleet;
+describe(">>> Group", () => {
+  let group: Group;
 
   const c1 = new C1();
   const c2 = new C2();
 
   beforeEach(() => {
-    fleet = mockFleetFactory();
+    group = mockGroupFactory();
   });
 
   it("should awake and update all Components", () => {
@@ -46,29 +46,29 @@ describe(">>> Fleet", () => {
     expect(spyUpdate1).not.toHaveBeenCalled();
     expect(spyUpdate2).not.toHaveBeenCalled();
 
-    fleet.AddComponent(c1);
-    fleet.AddComponent(c2);
+    group.AddComponent(c1);
+    group.AddComponent(c2);
 
-    fleet.Awake();
+    group.Awake();
     expect(spyAwake1).toHaveBeenCalled();
     expect(spyAwake2).toHaveBeenCalled();
 
-    fleet.Update(1);
+    group.Update(1);
     expect(spyUpdate1).toHaveBeenCalled();
     expect(spyUpdate2).toHaveBeenCalled();
   });
 
   it("should awake and update all children", () => {
-    const spyShipAwake = jest.spyOn(Ship.prototype, "Awake");
-    const spyShipUpdate = jest.spyOn(Ship.prototype, "Update");
+    const spyActorAwake = jest.spyOn(Actor.prototype, "Awake");
+    const spyActorUpdate = jest.spyOn(Actor.prototype, "Update");
 
-    expect(spyShipAwake).not.toHaveBeenCalled();
-    expect(spyShipUpdate).not.toHaveBeenCalled();
+    expect(spyActorAwake).not.toHaveBeenCalled();
+    expect(spyActorUpdate).not.toHaveBeenCalled();
 
-    fleet.Awake();
-    expect(spyShipAwake).toHaveBeenCalledTimes(Settings.ships.fleetSize);
+    group.Awake();
+    expect(spyActorAwake).toHaveBeenCalledTimes(Settings.actors.groupSize);
 
-    fleet.Update(0);
-    expect(spyShipUpdate).toHaveBeenCalledTimes(Settings.ships.fleetSize);
+    group.Update(0);
+    expect(spyActorUpdate).toHaveBeenCalledTimes(Settings.actors.groupSize);
   });
 });
