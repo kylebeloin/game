@@ -5,7 +5,10 @@ export const Settings = Object.freeze({
     dimension: 6,
     nodeSize: 100,
     nodeOffset: 10,
-    color: new Color(255, 255, 255, 1),
+    color: {
+      default: new Color(255, 255, 255, 1),
+      active: new Color(176, 190, 197, 1),
+    },
   },
   actors: {
     groupSize: 5,

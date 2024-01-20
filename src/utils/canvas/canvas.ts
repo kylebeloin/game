@@ -1,29 +1,20 @@
 import { IAwake, Vector2D, Color } from "..";
 
 export class Canvas implements IAwake {
-  private _element: HTMLCanvasElement | null = null;
-  private _ctx: CanvasRenderingContext2D | null = null;
+  private _element!: HTMLCanvasElement;
+  private _ctx!: CanvasRenderingContext2D;
 
   constructor(public readonly Size: Vector2D) {}
 
   public get Element(): HTMLCanvasElement {
-    if (!this._element) {
-      throw new Error("Canvas: Element is null");
-    }
     return this._element;
   }
 
   public get Context(): CanvasRenderingContext2D {
-    if (!this._ctx) {
-      throw new Error("Canvas: Context is null");
-    }
     return this._ctx;
   }
 
   public FillRect(start: Vector2D, size: Vector2D, color: Color): void {
-    if (!this._ctx) {
-      throw new Error("Canvas: Context is null");
-    }
     this._ctx.beginPath();
     this._ctx.fillStyle = color.AsString();
     this._ctx.rect(start.x, start.y, size.x, size.y);
@@ -31,17 +22,10 @@ export class Canvas implements IAwake {
   }
 
   public ClearRect(start: Vector2D, size: Vector2D): void {
-    if (!this._ctx) {
-      throw new Error("Canvas: Context is null");
-    }
     this._ctx.clearRect(start.x, start.y, size.x, size.y);
   }
 
   public FillCircle(center: Vector2D, radius: number, color: Color): void {
-    if (!this._ctx) {
-      throw new Error("Canvas: Context is null");
-    }
-
     this._ctx.beginPath();
     this._ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
     this._ctx.fillStyle = color.AsString();
@@ -49,9 +33,6 @@ export class Canvas implements IAwake {
   }
 
   public SetStyle(style: Partial<CSSStyleDeclaration>): void {
-    if (!this._element) {
-      throw new Error("Canvas: Element is null");
-    }
     for (const key in style) {
       if (!Object.hasOwnProperty.call(style, key)) {
         continue;
@@ -79,5 +60,32 @@ export class Canvas implements IAwake {
     }
 
     this._ctx = ctx;
+  }
+
+  public CalcLocalPointFrom(globalPoint: Vector2D): Vector2D | null {
+    const canvasRect = this._element.getBoundingClientRect();
+    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    const offset = {
+      top: canvasRect.top + scrollTop,
+      left: canvasRect.left + scrollLeft,
+    };
+
+    const x = globalPoint.x - offset.left;
+    const y = globalPoint.y - offset.top;
+
+    if (x < 0 || y < 0) {
+      return null;
+    }
+
+    if (
+      x > offset.left + canvasRect.width ||
+      y > offset.top + canvasRect.height
+    ) {
+      return null;
+    }
+
+    return new Vector2D(x, y);
   }
 }
