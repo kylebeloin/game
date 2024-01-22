@@ -1,5 +1,6 @@
-import { Game } from "@/entities/game";
+import { Game, Grid } from "@/entities";
 import { CanvasLayer, Vector2D } from "@/utils";
+import { OnClickComponent } from "@/components";
 
 import {
   InputComponent,
@@ -23,6 +24,10 @@ export class GameInputComponent
     );
     if (!point) return;
 
-    console.log(point.x, point.y);
+    for (const entity of this.Entity.Entities) {
+      if (!entity.HasComponent(OnClickComponent<Grid>)) continue;
+
+      entity.GetComponent(OnClickComponent<Grid>).ClickOn(point);
+    }
   }
 }

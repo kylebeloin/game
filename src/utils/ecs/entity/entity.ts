@@ -1,6 +1,11 @@
 import { IComponent } from "../component.h";
 import { IEntity } from "./entity.h";
-import { Constructor, InstanceMap } from "@/utils";
+import {
+  Constructor,
+  InstanceMap,
+  InstanceConstructor,
+  isAbstractConstructor,
+} from "@/utils";
 import registry from "./registry";
 
 export abstract class Entity implements IEntity {
@@ -38,6 +43,12 @@ export abstract class Entity implements IEntity {
     if (!this.HasComponent(constructor)) {
       throw new Error("Component does not exist on entity.");
     }
+    if (isAbstractConstructor(constructor)) {
+      for (let component of this._components.keys()) {
+        if (component.prototype instanceof constructor)
+          return this._components.get(component) as C;
+      }
+    }
     return this._components.get(constructor) as C;
   }
 
@@ -46,7 +57,9 @@ export abstract class Entity implements IEntity {
    * @param component - Component to add to entity
    * @returns
    */
-  public AddComponent<C extends IComponent>(component: C | Constructor<C>): C {
+  public AddComponent<C extends IComponent>(
+    component: C | InstanceConstructor<C>
+  ): C {
     if (typeof component === "function") component = new component();
     this._components.set(
       component.constructor as Constructor<IComponent>,
@@ -65,6 +78,11 @@ export abstract class Entity implements IEntity {
   public HasComponent<C extends IComponent>(
     constructor: Constructor<C>
   ): boolean {
+    if (isAbstractConstructor(constructor)) {
+      for (let component of this._components.keys()) {
+        if (component.prototype instanceof constructor) return true;
+      }
+    }
     return this._components.has(constructor);
   }
 }

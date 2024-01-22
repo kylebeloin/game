@@ -27,29 +27,6 @@ describe(">>> Canvas", () => {
       canvas.Awake();
     });
 
-    describe(">>> calculate local point by global", () => {
-      beforeEach(() => {
-        canvas.Element.getBoundingClientRect = jest.fn().mockReturnValue({
-          top: 20,
-          left: 20,
-          width: 500,
-          height: 500,
-        });
-      });
-
-      it("should return null if point is out of canvas boundaries", () => {
-        expect(canvas.CalcLocalPointFrom(new Vector2D(0, 0))).toBeNull();
-        expect(canvas.CalcLocalPointFrom(new Vector2D(541, 400))).toBeNull();
-        expect(canvas.CalcLocalPointFrom(new Vector2D(400, 541))).toBeNull();
-      });
-
-      it("should return local point otherwise", () => {
-        expect(canvas.CalcLocalPointFrom(new Vector2D(200, 300))).toEqual(
-          new Vector2D(180, 280)
-        );
-      });
-    });
-
     it("should draw and fill the rect", () => {
       const start = new Vector2D(0, 0);
       const size = new Vector2D(10, 10);
@@ -113,6 +90,45 @@ describe(">>> Canvas", () => {
       canvas.SetStyle({ zIndex });
 
       expect(canvas.Element.style.zIndex).toBe<string>(zIndex);
+    });
+
+    it("should draw the text", () => {
+      const text = "text";
+      const position = new Vector2D(0, 0);
+      const color = new Color(255, 10, 20, 1);
+      // --- ADD --- //
+
+      const spy = jest.spyOn(canvas.Context, "fillText");
+
+      expect(spy).not.toHaveBeenCalled();
+
+      // --- ADD --- //
+      canvas.DrawText(text, position, color);
+
+      expect(spy).toHaveBeenCalledWith(text, position.x, position.y);
+    });
+
+    describe(">>> calculate local point by global", () => {
+      beforeEach(() => {
+        canvas.Element.getBoundingClientRect = jest.fn().mockReturnValue({
+          top: 20,
+          left: 20,
+          width: 500,
+          height: 500,
+        });
+      });
+
+      it("should return null if point is out of canvas boundaries", () => {
+        expect(canvas.CalcLocalPointFrom(new Vector2D(0, 0))).toBeNull();
+        expect(canvas.CalcLocalPointFrom(new Vector2D(541, 400))).toBeNull();
+        expect(canvas.CalcLocalPointFrom(new Vector2D(400, 541))).toBeNull();
+      });
+
+      it("should return local point otherwise", () => {
+        expect(canvas.CalcLocalPointFrom(new Vector2D(200, 300))).toEqual(
+          new Vector2D(180, 280)
+        );
+      });
     });
   });
 });

@@ -1,6 +1,7 @@
 import { Entity, Vector2D } from "@/utils";
-import { Node } from "@/entities/node";
+import { Node } from "@/entities";
 import { Settings } from "@/settings";
+import { GridOnClickComponent } from "./components";
 
 export class Grid extends Entity {
   private _nodes: Node[] = [];
@@ -10,6 +11,7 @@ export class Grid extends Entity {
   }
 
   public Awake(): void {
+    this.AddComponent(new GridOnClickComponent());
     // awake components
     super.Awake();
     this.InitNodes();

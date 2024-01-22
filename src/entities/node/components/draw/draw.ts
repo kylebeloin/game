@@ -1,5 +1,5 @@
 import type { IComponent } from "@/utils";
-import { CanvasLayer } from "@/utils";
+import { CanvasLayer, Color } from "@/utils";
 import { Node } from "@/entities/node";
 import { Settings } from "@/settings";
 
@@ -15,6 +15,7 @@ export class NodeDrawComponent implements IComponent {
     // to implement
     this.Clear();
     this.Draw();
+    this.DrawDebugInfo();
   }
 
   private Draw(): void {
@@ -24,6 +25,15 @@ export class NodeDrawComponent implements IComponent {
       this.Entity.IsActive
         ? Settings.grid.color.active
         : Settings.grid.color.default
+    );
+  }
+
+  private DrawDebugInfo(): void {
+    const entity = this.Entity;
+    CanvasLayer.Background.DrawText(
+      `${entity.Index.x}, ${entity.Index.y}`,
+      entity.Start,
+      new Color(255, 255, 255, 1)
     );
   }
 

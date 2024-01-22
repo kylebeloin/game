@@ -9,6 +9,10 @@ export class Game extends Entity {
 
   private _lastTimestamp = 0;
 
+  public get Entities(): Array<Entity> {
+    return this._entities;
+  }
+
   public Awake(): void {
     this.AddComponent(new GameInputComponent());
 
@@ -22,7 +26,7 @@ export class Game extends Entity {
 
     window.requestAnimationFrame(() => {
       // set initial timestamp
-      this._lastTimestamp = Date.now();
+      this._lastTimestamp = window.performance.timeOrigin;
 
       // start update loop
       this.Update();
@@ -30,7 +34,7 @@ export class Game extends Entity {
   }
 
   public Update(): void {
-    let deltaTime = (Date.now() - this._lastTimestamp) / 1000;
+    const deltaTime = (window.performance.now() - this._lastTimestamp) / 1000;
     super.Update(deltaTime);
 
     // awake all children
@@ -39,7 +43,7 @@ export class Game extends Entity {
     }
 
     window.requestAnimationFrame(() => {
-      this._lastTimestamp = Date.now();
+      this._lastTimestamp = window.performance.now();
       this.Update();
     });
   }
