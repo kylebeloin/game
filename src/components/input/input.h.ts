@@ -1,4 +1,4 @@
-import { IComponent } from "@/utils";
+import { IComponent } from "@/systems";
 
 export interface IInputComponent extends IComponent {}
 

@@ -1,5 +1,5 @@
 import { IClickInputComponent } from "@/components";
-import { IComponent } from "@/utils";
+import { IComponent } from "@/systems";
 
 export const isClickInput = (
   component: IComponent

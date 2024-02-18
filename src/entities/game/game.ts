@@ -1,7 +1,6 @@
-import { Entity } from "@/utils";
-import { Grid } from "@/entities/grid";
+import { Entity } from "@/systems";
+import { Grid, Group } from "@/entities";
 import { Team } from "@/team";
-import { Group } from "@/entities/group";
 import { GameInputComponent } from "./components";
 
 export class Game extends Entity {

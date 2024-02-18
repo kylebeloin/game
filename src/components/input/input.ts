@@ -1,4 +1,4 @@
-import { IComponent, Entity } from "@/utils";
+import { IComponent, Entity } from "@/systems";
 
 export abstract class InputComponent<T extends Entity> implements IComponent {
   public abstract Entity: T;

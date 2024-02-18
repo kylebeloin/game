@@ -3,6 +3,7 @@ export type InstanceConstructor<T> = { new (...args: unknown[]): T };
 
 export type Constructor<T> = AbstractComponent<T> | InstanceConstructor<T>;
 export type InstanceMap<T> = Map<Constructor<T>, T>;
+export type InstanceSet<T> = Set<Constructor<T>>;
 
 export function isAbstractConstructor<T>(
   constructor: Constructor<T>

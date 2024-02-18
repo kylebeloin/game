@@ -1,8 +1,8 @@
-import { IComponent, Vector2D } from "@/utils";
-import { Actor } from "@/entities/actor";
-import { Node } from "@/entities/node";
+import { Actor, Node } from "@/entities";
+import { LocomotionComponent } from "@/components";
+import { Vector2D } from "@/utils";
 
-export class ActorLocomotionComponent implements IComponent {
+export class ActorLocomotionComponent extends LocomotionComponent<Actor> {
   public Entity!: Actor;
 
   /**

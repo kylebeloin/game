@@ -1,4 +1,4 @@
-import type { IComponent } from "@/utils";
+import type { IComponent } from "@/systems";
 import { CanvasLayer, Color } from "@/utils";
 import { Node } from "@/entities/node";
 import { Settings } from "@/settings";

@@ -1,5 +1,5 @@
 import { Group, mockGroupFactory } from "@/entities";
-import { IComponent } from "@/utils";
+import { IComponent } from "@/systems";
 import { Actor } from "@/entities/actor";
 import { Settings } from "@/settings";
 

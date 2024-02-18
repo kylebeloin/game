@@ -1,6 +1,7 @@
-import type { InstanceMap, IComponent } from "@/utils";
+import type { InstanceMap } from "@/utils";
+import type { IComponent } from "@/systems";
 
-export interface IRegisteredEntity {
+export type RegisteredEntity = {
   id: number;
   components: InstanceMap<IComponent>;
-}
+};

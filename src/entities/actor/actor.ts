@@ -1,4 +1,6 @@
-import { Entity, Vector2D } from "@/utils";
+import { Vector2D } from "@/utils";
+import { Entity } from "@/systems";
+
 import { Node } from "@/entities/node";
 import { Group } from "@/entities/group";
 import { ActorDrawComponent, ActorLocomotionComponent } from "./components";

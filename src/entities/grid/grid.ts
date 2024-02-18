@@ -1,4 +1,5 @@
-import { Entity, Vector2D } from "@/utils";
+import { Entity } from "@/systems";
+import { Vector2D } from "@/utils";
 import { Node } from "@/entities";
 import { Settings } from "@/settings";
 import { GridOnClickComponent } from "./components";

@@ -1,4 +1,4 @@
-import { Entity } from "@/utils";
+import { Entity } from "@/systems";
 import { Team } from "@/team";
 import { Actor, Grid } from "@/entities";
 import { Settings } from "@/settings";

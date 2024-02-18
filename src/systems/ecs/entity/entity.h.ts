@@ -1,5 +1,5 @@
-import { IAwake, IUpdate, IComponent } from "@/utils";
-import { InstanceMap } from "@/utils";
+import { IAwake, IUpdate, InstanceMap } from "@/utils";
+import { IComponent } from "@/systems";
 
 export interface IEntity extends IAwake, IUpdate {
   readonly id: number;
