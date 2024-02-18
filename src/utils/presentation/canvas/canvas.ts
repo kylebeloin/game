@@ -1,4 +1,4 @@
-import { IAwake, Vector2D, Color } from "..";
+import { IAwake, Vector2D, Color } from "../..";
 
 export class Canvas implements IAwake {
   private _element!: HTMLCanvasElement;

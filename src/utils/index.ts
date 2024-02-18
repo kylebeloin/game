@@ -1,8 +1,5 @@
-export * from "./ecs";
-export * from "./color";
-
+export * from "../systems/ecs";
+export * from "./presentation";
 export * from "./lifecycle";
-export * from "./vector2d";
-export * from "./canvas";
-export * from "./canvas-layer";
+export * from "./math";
 export * from "./type-utils";

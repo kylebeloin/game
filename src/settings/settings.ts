@@ -1,4 +1,4 @@
-import { Color } from "../utils/color";
+import { Color } from "../utils/presentation/color";
 
 export const Settings = Object.freeze({
   grid: {
