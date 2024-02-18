@@ -2,7 +2,7 @@ import { Entity, IComponent } from "@/systems";
 import { Vector2D } from "@/utils";
 
 export abstract class OnClickComponent<T extends Entity> implements IComponent {
-  public Entity!: T;
+  public abstract Entity: T;
 
   public abstract Awake(): void;
 
