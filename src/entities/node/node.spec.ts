@@ -13,27 +13,27 @@ describe(">>> Node", () => {
   });
 
   it("should awake and update all Components", () => {
-    const spyDrawCompAwake = jest.spyOn(NodeDrawComponent.prototype, "Awake");
-    const spyDrawCompUpdate = jest.spyOn(NodeDrawComponent.prototype, "Update");
+    const spyDrawCompAwake = jest.spyOn(NodeDrawComponent.prototype, "awake");
+    const spyDrawCompUpdate = jest.spyOn(NodeDrawComponent.prototype, "update");
 
     expect(spyDrawCompAwake).not.toHaveBeenCalled();
     expect(spyDrawCompUpdate).not.toHaveBeenCalled();
 
-    node.Awake();
+    node.awake();
     expect(spyDrawCompAwake).toHaveBeenCalled();
 
-    node.Update(0);
+    node.update(0);
     expect(spyDrawCompUpdate).toHaveBeenCalled();
   });
 
   it("should calculate size", () => {
-    expect(node.Size.x).toBe<number>(end.x - start.x);
-    expect(node.Size.y).toBe<number>(end.y - start.y);
+    expect(node.size.x).toBe<number>(end.x - start.x);
+    expect(node.size.y).toBe<number>(end.y - start.y);
   });
 
   it("should check if provided point is within occupied area", () => {
-    expect(node.Occupies(new Vector2D(3, 2))).toBeTruthy();
-    expect(node.Occupies(new Vector2D(6, 2))).toBeFalsy();
-    expect(node.Occupies(new Vector2D(3, 7))).toBeFalsy();
+    expect(node.occupies(new Vector2D(3, 2))).toBeTruthy();
+    expect(node.occupies(new Vector2D(6, 2))).toBeFalsy();
+    expect(node.occupies(new Vector2D(3, 7))).toBeFalsy();
   });
 });

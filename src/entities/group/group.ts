@@ -10,22 +10,22 @@ export class Group extends Entity {
     super();
   }
 
-  public Awake(): void {
-    super.Awake();
+  public awake(): void {
+    super.awake();
 
     // init and awake actors
     this.PrepareActors();
   }
 
-  public Update(deltaTime: number): void {
-    super.Update(deltaTime);
+  public update(deltaTime: number): void {
+    super.update(deltaTime);
 
-    this._actors.map((actor) => actor.Update(deltaTime));
+    this._actors.map((actor) => actor.update(deltaTime));
   }
 
   private PrepareActors(): void {
     const dimension = Settings.grid.dimension; // <--- ADD
-    const nodes = this._grid.Nodes; // <--- ADD
+    const nodes = this._grid.nodes; // <--- ADD
     const groupSize = Settings.actors.groupSize;
 
     for (let i = 0; i < groupSize; i++) {
@@ -35,7 +35,7 @@ export class Group extends Entity {
           : nodes[nodes.length - 1 - i * dimension];
       const actor = new Actor(this, node);
       this._actors.push(actor);
-      actor.Awake();
+      actor.awake();
     }
   }
 }

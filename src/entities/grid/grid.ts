@@ -7,33 +7,33 @@ import { GridOnClickComponent } from "./components";
 export class Grid extends Entity {
   private _nodes: Node[] = [];
 
-  public get Nodes(): Node[] {
+  public get nodes(): Node[] {
     return this._nodes;
   }
 
-  public Awake(): void {
-    this.AddComponent(new GridOnClickComponent());
+  public awake(): void {
+    this.addComponent(new GridOnClickComponent());
     // awake components
-    super.Awake();
-    this.InitNodes();
+    super.awake();
+    this.initNodes();
 
     // awake children
     for (const node of this._nodes) {
-      node.Awake();
+      node.awake();
     }
   }
 
-  public Update(deltaTime: number): void {
+  public update(deltaTime: number): void {
     // update components
-    super.Update(deltaTime);
+    super.update(deltaTime);
 
     // update children
     for (const node of this._nodes) {
-      node.Update(deltaTime);
+      node.update(deltaTime);
     }
   }
 
-  private InitNodes(): void {
+  private initNodes(): void {
     const size = Settings.grid.nodeSize;
     const offset = Settings.grid.nodeOffset;
     for (

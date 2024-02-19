@@ -4,35 +4,35 @@ export class Canvas implements IAwake {
   private _element!: HTMLCanvasElement;
   private _ctx!: CanvasRenderingContext2D;
 
-  constructor(public readonly Size: Vector2D) {}
+  constructor(public readonly size: Vector2D) {}
 
-  public get Element(): HTMLCanvasElement {
+  public get element(): HTMLCanvasElement {
     return this._element;
   }
 
-  public get Context(): CanvasRenderingContext2D {
+  public get context(): CanvasRenderingContext2D {
     return this._ctx;
   }
 
-  public FillRect(start: Vector2D, size: Vector2D, color: Color): void {
+  public fillRect(start: Vector2D, size: Vector2D, color: Color): void {
     this._ctx.beginPath();
-    this._ctx.fillStyle = color.AsString();
+    this._ctx.fillStyle = color.asString();
     this._ctx.rect(start.x, start.y, size.x, size.y);
     this._ctx.fill();
   }
 
-  public ClearRect(start: Vector2D, size: Vector2D): void {
+  public clearRect(start: Vector2D, size: Vector2D): void {
     this._ctx.clearRect(start.x, start.y, size.x, size.y);
   }
 
-  public FillCircle(center: Vector2D, radius: number, color: Color): void {
+  public fillCircle(center: Vector2D, radius: number, color: Color): void {
     this._ctx.beginPath();
     this._ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
-    this._ctx.fillStyle = color.AsString();
+    this._ctx.fillStyle = color.asString();
     this._ctx.fill();
   }
 
-  public SetStyle(style: Partial<CSSStyleDeclaration>): void {
+  public setStyle(style: Partial<CSSStyleDeclaration>): void {
     for (const key in style) {
       if (!Object.hasOwnProperty.call(style, key)) {
         continue;
@@ -46,10 +46,10 @@ export class Canvas implements IAwake {
     }
   }
 
-  public Awake(): void {
+  public awake(): void {
     const canvas = document.createElement("canvas");
-    canvas.setAttribute("width", `${this.Size.x}px`);
-    canvas.setAttribute("height", `${this.Size.y}px`);
+    canvas.setAttribute("width", `${this.size.x}px`);
+    canvas.setAttribute("height", `${this.size.y}px`);
 
     document.body.appendChild(canvas);
     this._element = canvas;
@@ -62,7 +62,7 @@ export class Canvas implements IAwake {
     this._ctx = ctx;
   }
 
-  public CalcLocalPointFrom(globalPoint: Vector2D): Vector2D | null {
+  public calcLocalPointFrom(globalPoint: Vector2D): Vector2D | null {
     const canvasRect = this._element.getBoundingClientRect();
     const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -89,7 +89,7 @@ export class Canvas implements IAwake {
     return new Vector2D(x, y);
   }
 
-  public DrawText(
+  public drawText(
     text: string,
     position: Vector2D,
     color: Color = new Color(255, 255, 255, 1),
@@ -97,7 +97,7 @@ export class Canvas implements IAwake {
     font = "Arial"
   ): void {
     this._ctx.font = `${fontSize}px ${font}`;
-    this._ctx.fillStyle = color.AsString();
+    this._ctx.fillStyle = color.asString();
     this._ctx.fillText(text, position.x, position.y);
   }
 }

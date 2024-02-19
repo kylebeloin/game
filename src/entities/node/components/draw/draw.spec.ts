@@ -8,14 +8,14 @@ describe(">>> Node Draw Component", () => {
   let comp: NodeDrawComponent;
   beforeEach(() => {
     comp = new NodeDrawComponent();
-    comp.Entity = mockNodeFactory();
+    comp.entity = mockNodeFactory();
   });
 
   it("should cleanup when awakens", () => {
     const spy = jest.spyOn(CanvasLayer.Background, "ClearRect");
     expect(spy).not.toHaveBeenCalled();
 
-    comp.Awake();
+    comp.awake();
 
     expect(spy).toHaveBeenCalled();
   });
@@ -27,7 +27,7 @@ describe(">>> Node Draw Component", () => {
     expect(spyClearRect).not.toHaveBeenCalled();
     expect(spyFillRect).not.toHaveBeenCalled();
 
-    comp.Update(0);
+    comp.update(0);
 
     expect(spyClearRect).toHaveBeenCalled();
     expect(spyFillRect).toHaveBeenCalled();
@@ -36,19 +36,19 @@ describe(">>> Node Draw Component", () => {
   it("should render active color if entity is active and regular color otherwise", () => {
     const spyFillRect = jest.spyOn(CanvasLayer.Background, "FillRect");
 
-    comp.Entity.IsActive = true;
-    comp.Update(0);
+    comp.entity.isActive = true;
+    comp.update(0);
     expect(spyFillRect).toHaveBeenCalledWith(
-      comp.Entity.Start,
-      comp.Entity.Size,
+      comp.entity.start,
+      comp.entity.size,
       Settings.grid.color.active
     );
 
-    comp.Entity.IsActive = false;
-    comp.Update(0);
+    comp.entity.isActive = false;
+    comp.update(0);
     expect(spyFillRect).toHaveBeenCalledWith(
-      comp.Entity.Start,
-      comp.Entity.Size,
+      comp.entity.start,
+      comp.entity.size,
       Settings.grid.color.default
     );
   });

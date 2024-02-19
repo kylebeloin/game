@@ -14,7 +14,7 @@ export class CanvasLayer {
    */
   public static get Background(): Canvas {
     if (!this._background) {
-      this._background = this.InitCanvas();
+      this._background = this.initCanvas();
     }
     return this._background;
   }
@@ -24,7 +24,7 @@ export class CanvasLayer {
    */
   public static get Main(): Canvas {
     if (!this._main) {
-      this._main = this.InitCanvas({ zIndex: "1" });
+      this._main = this.initCanvas({ zIndex: "1" });
     }
     return this._main;
   }
@@ -34,19 +34,19 @@ export class CanvasLayer {
    */
   public static get Foreground(): Canvas {
     if (!this._foreground) {
-      this._foreground = this.InitCanvas({ zIndex: "2" });
+      this._foreground = this.initCanvas({ zIndex: "2" });
     }
     return this._foreground;
   }
 
-  private static InitCanvas(style: Partial<CSSStyleDeclaration> = {}): Canvas {
+  private static initCanvas(style: Partial<CSSStyleDeclaration> = {}): Canvas {
     const size =
       (Settings.grid.nodeSize + Settings.grid.nodeOffset) *
         Settings.grid.dimension +
       Settings.grid.nodeOffset;
     const canvas = new Canvas(new Vector2D(size, size));
-    canvas.Awake();
-    canvas.SetStyle(style);
+    canvas.awake();
+    canvas.setStyle(style);
 
     return canvas;
   }

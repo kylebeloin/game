@@ -4,21 +4,21 @@ import { Actor } from "@/entities/actor";
 import { Settings } from "@/settings";
 
 class C1 implements IComponent {
-  public Entity!: Group;
-  public Awake(): void {
+  public entity!: Group;
+  public awake(): void {
     /*...*/
   }
-  public Update(_: number): void {
+  public update(_: number): void {
     /*...*/
   }
 }
 
 class C2 implements IComponent {
-  public Entity!: Group;
-  public Awake(): void {
+  public entity!: Group;
+  public awake(): void {
     /*...*/
   }
-  public Update(_: number): void {
+  public update(_: number): void {
     /*...*/
   }
 }
@@ -34,11 +34,11 @@ describe(">>> Group", () => {
   });
 
   it("should awake and update all Components", () => {
-    const spyAwake1 = jest.spyOn(c1, "Awake");
-    const spyAwake2 = jest.spyOn(c2, "Awake");
+    const spyAwake1 = jest.spyOn(c1, "awake");
+    const spyAwake2 = jest.spyOn(c2, "awake");
 
-    const spyUpdate1 = jest.spyOn(c1, "Update");
-    const spyUpdate2 = jest.spyOn(c2, "Update");
+    const spyUpdate1 = jest.spyOn(c1, "update");
+    const spyUpdate2 = jest.spyOn(c2, "update");
 
     expect(spyAwake1).not.toHaveBeenCalled();
     expect(spyAwake2).not.toHaveBeenCalled();
@@ -46,29 +46,29 @@ describe(">>> Group", () => {
     expect(spyUpdate1).not.toHaveBeenCalled();
     expect(spyUpdate2).not.toHaveBeenCalled();
 
-    group.AddComponent(c1);
-    group.AddComponent(c2);
+    group.addComponent(c1);
+    group.addComponent(c2);
 
-    group.Awake();
+    group.awake();
     expect(spyAwake1).toHaveBeenCalled();
     expect(spyAwake2).toHaveBeenCalled();
 
-    group.Update(1);
+    group.update(1);
     expect(spyUpdate1).toHaveBeenCalled();
     expect(spyUpdate2).toHaveBeenCalled();
   });
 
   it("should awake and update all children", () => {
-    const spyActorAwake = jest.spyOn(Actor.prototype, "Awake");
-    const spyActorUpdate = jest.spyOn(Actor.prototype, "Update");
+    const spyActorAwake = jest.spyOn(Actor.prototype, "awake");
+    const spyActorUpdate = jest.spyOn(Actor.prototype, "update");
 
     expect(spyActorAwake).not.toHaveBeenCalled();
     expect(spyActorUpdate).not.toHaveBeenCalled();
 
-    group.Awake();
+    group.awake();
     expect(spyActorAwake).toHaveBeenCalledTimes(Settings.actors.groupSize);
 
-    group.Update(1);
+    group.update(1);
     expect(spyActorUpdate).toHaveBeenCalledTimes(Settings.actors.groupSize);
   });
 });

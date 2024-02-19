@@ -7,41 +7,41 @@ export class PlayerTransformComponent extends TransformComponent<Player> {
   private _rotation: number = 0;
   private _scale: Vector2D = new Vector2D(1, 1);
 
-  public Awake(): void {}
-  public Update(_: number): void {}
+  public awake(): void {}
+  public update(_: number): void {}
 
-  public Entity!: Player;
+  public entity!: Player;
 
-  public get Position(): Vector2D {
+  public get position(): Vector2D {
     return this._position;
   }
 
-  public get Rotation(): number {
+  public get rotation(): number {
     return this._rotation;
   }
 
-  public set Rotation(value: number) {
+  public set rotation(value: number) {
     this._rotation = value;
   }
 
-  public get Scale(): Vector2D {
+  public get scale(): Vector2D {
     return this._scale;
   }
 
-  public Translate(vector: Vector2D): void {
-    super.Translate(vector);
+  public translate(vector: Vector2D): void {
+    super.translate(vector);
   }
 
-  public Rotate(angle: number): void {
-    super.Rotate(angle);
+  public rotate(angle: number): void {
+    super.rotate(angle);
   }
 
-  public ScaleBy(vector: Vector2D): void {
-    super.ScaleBy(vector);
+  public scaleBy(vector: Vector2D): void {
+    super.scaleBy(vector);
   }
 
   constructor(entity: Player) {
     super();
-    this.Entity = entity;
+    this.entity = entity;
   }
 }

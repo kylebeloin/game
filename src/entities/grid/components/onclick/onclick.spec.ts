@@ -7,13 +7,13 @@ describe(">>> Grid Click Component", () => {
 
   beforeEach(() => {
     comp = new GridOnClickComponent();
-    comp.Entity = mockGridFactory();
-    comp.Entity.Awake();
+    comp.entity = mockGridFactory();
+    comp.entity.awake();
   });
 
   it("should update node if clicked within its range", () => {
-    comp.ClickOn(new Vector2D(100, 100));
-    expect(comp.Entity.Nodes[0].IsActive).toBeTruthy();
-    expect(comp.Entity.Nodes[1].IsActive).toBeFalsy();
+    comp.clickOn(new Vector2D(100, 100));
+    expect(comp.entity.nodes[0].isActive).toBeTruthy();
+    expect(comp.entity.nodes[1].isActive).toBeFalsy();
   });
 });

@@ -8,19 +8,19 @@ describe(">>> Actor", () => {
   });
 
   it("should awake and update all Components", () => {
-    const spyDrawCompAwake = jest.spyOn(ActorDrawComponent.prototype, "Awake");
+    const spyDrawCompAwake = jest.spyOn(ActorDrawComponent.prototype, "awake");
     const spyDrawCompUpdate = jest.spyOn(
       ActorDrawComponent.prototype,
-      "Update"
+      "update"
     );
 
     expect(spyDrawCompAwake).not.toHaveBeenCalled();
     expect(spyDrawCompUpdate).not.toHaveBeenCalled();
 
-    Actor.Awake();
+    Actor.awake();
     expect(spyDrawCompAwake).toHaveBeenCalled();
 
-    Actor.Update(0);
+    Actor.update(0);
     expect(spyDrawCompUpdate).toHaveBeenCalled();
   });
 });

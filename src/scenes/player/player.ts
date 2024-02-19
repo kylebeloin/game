@@ -1,10 +1,10 @@
 import { Actor } from "@/entities";
 
 export class Player extends Actor {
-  public Awake(): void {
-    super.Awake();
+  public awake(): void {
+    super.awake();
   }
-  public Update(_: number): void {
-    super.Update(_);
+  public update(_: number): void {
+    super.update(_);
   }
 }

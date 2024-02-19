@@ -5,16 +5,16 @@ export class Color {
   public readonly A: number = 1;
 
   constructor(r: number, g: number, b: number, a: number = 1) {
-    if (!Color.IsValidChannel(r, false)) {
+    if (!Color.isValidChannel(r, false)) {
       throw new Error(`Color: Invalid red channel ${r}`);
     }
-    if (!Color.IsValidChannel(g, false)) {
+    if (!Color.isValidChannel(g, false)) {
       throw new Error(`Color: Invalid green channel ${g}`);
     }
-    if (!Color.IsValidChannel(b, false)) {
+    if (!Color.isValidChannel(b, false)) {
       throw new Error(`Color: Invalid blue channel ${b}`);
     }
-    if (!Color.IsValidChannel(a, true)) {
+    if (!Color.isValidChannel(a, true)) {
       throw new Error(`Color: Invalid alpha channel ${a}`);
     }
     this.R = r;
@@ -23,7 +23,7 @@ export class Color {
     this.A = a;
   }
 
-  public static IsValidChannel(channel: number, isAlpha: boolean): boolean {
+  public static isValidChannel(channel: number, isAlpha: boolean): boolean {
     const max = isAlpha ? 1 : 255;
     if (channel < 0 || channel > max) {
       return false;
@@ -36,11 +36,11 @@ export class Color {
     return true;
   }
 
-  public AsString(): string {
+  public asString(): string {
     return `rgba(${this.R}, ${this.G}, ${this.B}, ${this.A})`;
   }
 
-  public static FromHex(hex: string): Color {
+  public static fromHex(hex: string): Color {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
     if (!result) {
@@ -59,7 +59,7 @@ export class Color {
     return new Color(r, g, b, a);
   }
 
-  public static FromString(str: string): Color {
+  public static fromString(str: string): Color {
     const arr = str.replace(new RegExp(/\(|\)|[A-Za-z]/g), "").split(",");
 
     const r = Number(arr[0]),

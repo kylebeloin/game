@@ -19,30 +19,30 @@ describe(">>> Game", () => {
   });
 
   it("should start update loop next frame after awake", () => {
-    const spy = jest.spyOn(game, "Update");
-    game.Awake();
+    const spy = jest.spyOn(game, "update");
+    game.awake();
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it("should update and awake all components", () => {
-    const inputSpyAwake = jest.spyOn(GameInputComponent.prototype, "Awake");
-    const inputSpyUpdate = jest.spyOn(GameInputComponent.prototype, "Update");
+    const inputSpyAwake = jest.spyOn(GameInputComponent.prototype, "awake");
+    const inputSpyUpdate = jest.spyOn(GameInputComponent.prototype, "update");
 
     expect(inputSpyAwake).not.toHaveBeenCalled();
     expect(inputSpyUpdate).not.toHaveBeenCalled();
 
-    game.Awake();
+    game.awake();
 
     expect(inputSpyAwake).toHaveBeenCalled();
     expect(inputSpyUpdate).toHaveBeenCalled();
   });
 
   it("should awake and update all children", () => {
-    const spyGridAwake = jest.spyOn(Grid.prototype, "Awake");
-    const spyGridUpdate = jest.spyOn(Grid.prototype, "Update");
+    const spyGridAwake = jest.spyOn(Grid.prototype, "awake");
+    const spyGridUpdate = jest.spyOn(Grid.prototype, "update");
 
-    const spyGroupAwake = jest.spyOn(Group.prototype, "Awake");
-    const spyGroupUpdate = jest.spyOn(Group.prototype, "Update");
+    const spyGroupAwake = jest.spyOn(Group.prototype, "awake");
+    const spyGroupUpdate = jest.spyOn(Group.prototype, "update");
 
     expect(spyGridAwake).not.toHaveBeenCalled();
     expect(spyGridUpdate).not.toHaveBeenCalled();
@@ -50,11 +50,11 @@ describe(">>> Game", () => {
     expect(spyGroupAwake).not.toHaveBeenCalled();
     expect(spyGroupUpdate).not.toHaveBeenCalled();
 
-    game.Awake();
+    game.awake();
     expect(spyGridAwake).toHaveBeenCalled();
     expect(spyGroupAwake).toHaveBeenCalled();
 
-    game.Update();
+    game.update();
     expect(spyGridUpdate).toHaveBeenCalled();
     expect(spyGroupUpdate).toHaveBeenCalled();
   });

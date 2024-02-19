@@ -16,7 +16,7 @@ describe(">>> Canvas", () => {
     expect(createElmSpy).not.toHaveBeenCalled();
     expect(appendChildSpy).not.toHaveBeenCalled();
 
-    canvas.Awake();
+    canvas.awake();
 
     expect(createElmSpy).toHaveBeenCalled();
     expect(appendChildSpy).toHaveBeenCalled();
@@ -24,7 +24,7 @@ describe(">>> Canvas", () => {
 
   describe(">> API", () => {
     beforeEach(() => {
-      canvas.Awake();
+      canvas.awake();
     });
 
     it("should draw and fill the rect", () => {
@@ -32,28 +32,28 @@ describe(">>> Canvas", () => {
       const size = new Vector2D(10, 10);
       const color = new Color(255, 255, 255, 1);
 
-      const beginPathSpy = jest.spyOn(canvas.Context, "beginPath");
-      const rectSpy = jest.spyOn(canvas.Context, "rect");
-      const fillSpy = jest.spyOn(canvas.Context, "fill");
+      const beginPathSpy = jest.spyOn(canvas.context, "beginPath");
+      const rectSpy = jest.spyOn(canvas.context, "rect");
+      const fillSpy = jest.spyOn(canvas.context, "fill");
 
-      canvas.FillRect(start, size, color);
+      canvas.fillRect(start, size, color);
 
-      const canvasColor = Color.FromHex(canvas.Context.fillStyle.toString());
+      const canvasColor = Color.fromHex(canvas.context.fillStyle.toString());
 
       expect(beginPathSpy).toHaveBeenCalled();
       expect(rectSpy).toHaveBeenCalledWith(start.x, start.y, size.x, size.y);
       expect(fillSpy).toHaveBeenCalled();
-      expect(canvasColor.AsString() === color.AsString()).toBeTruthy();
+      expect(canvasColor.asString() === color.asString()).toBeTruthy();
     });
 
     it("should clear the rect", () => {
       const start = new Vector2D(0, 0);
       const size = new Vector2D(10, 10);
 
-      const spy = jest.spyOn(canvas.Context, "clearRect");
+      const spy = jest.spyOn(canvas.context, "clearRect");
       expect(spy).not.toHaveBeenCalled();
 
-      canvas.ClearRect(start, size);
+      canvas.clearRect(start, size);
 
       expect(spy).toHaveBeenCalledWith(start.x, start.y, size.x, size.y);
     });
@@ -63,13 +63,13 @@ describe(">>> Canvas", () => {
       const radius = 10;
       const color = new Color(255, 255, 255, 1);
 
-      const beginPathSpy = jest.spyOn(canvas.Context, "beginPath");
-      const arcSpy = jest.spyOn(canvas.Context, "arc");
-      const fillSpy = jest.spyOn(canvas.Context, "fill");
+      const beginPathSpy = jest.spyOn(canvas.context, "beginPath");
+      const arcSpy = jest.spyOn(canvas.context, "arc");
+      const fillSpy = jest.spyOn(canvas.context, "fill");
 
-      canvas.FillCircle(center, radius, color);
+      canvas.fillCircle(center, radius, color);
 
-      const canvasColor = Color.FromHex(canvas.Context.fillStyle.toString());
+      const canvasColor = Color.fromHex(canvas.context.fillStyle.toString());
 
       expect(beginPathSpy).toHaveBeenCalled();
       expect(arcSpy).toHaveBeenCalledWith(
@@ -80,16 +80,16 @@ describe(">>> Canvas", () => {
         Math.PI * 2
       );
       expect(fillSpy).toHaveBeenCalled();
-      expect(canvasColor.AsString() === color.AsString()).toBeTruthy();
+      expect(canvasColor.asString() === color.asString()).toBeTruthy();
     });
 
     it("should set css style", () => {
       const zIndex = "1";
-      expect(canvas.Element.style.zIndex).not.toBe<string>(zIndex);
+      expect(canvas.element.style.zIndex).not.toBe<string>(zIndex);
 
-      canvas.SetStyle({ zIndex });
+      canvas.setStyle({ zIndex });
 
-      expect(canvas.Element.style.zIndex).toBe<string>(zIndex);
+      expect(canvas.element.style.zIndex).toBe<string>(zIndex);
     });
 
     it("should draw the text", () => {
@@ -98,19 +98,19 @@ describe(">>> Canvas", () => {
       const color = new Color(255, 10, 20, 1);
       // --- ADD --- //
 
-      const spy = jest.spyOn(canvas.Context, "fillText");
+      const spy = jest.spyOn(canvas.context, "fillText");
 
       expect(spy).not.toHaveBeenCalled();
 
       // --- ADD --- //
-      canvas.DrawText(text, position, color);
+      canvas.drawText(text, position, color);
 
       expect(spy).toHaveBeenCalledWith(text, position.x, position.y);
     });
 
     describe(">>> calculate local point by global", () => {
       beforeEach(() => {
-        canvas.Element.getBoundingClientRect = jest.fn().mockReturnValue({
+        canvas.element.getBoundingClientRect = jest.fn().mockReturnValue({
           top: 20,
           left: 20,
           width: 500,
@@ -119,13 +119,13 @@ describe(">>> Canvas", () => {
       });
 
       it("should return null if point is out of canvas boundaries", () => {
-        expect(canvas.CalcLocalPointFrom(new Vector2D(0, 0))).toBeNull();
-        expect(canvas.CalcLocalPointFrom(new Vector2D(541, 400))).toBeNull();
-        expect(canvas.CalcLocalPointFrom(new Vector2D(400, 541))).toBeNull();
+        expect(canvas.calcLocalPointFrom(new Vector2D(0, 0))).toBeNull();
+        expect(canvas.calcLocalPointFrom(new Vector2D(541, 400))).toBeNull();
+        expect(canvas.calcLocalPointFrom(new Vector2D(400, 541))).toBeNull();
       });
 
       it("should return local point otherwise", () => {
-        expect(canvas.CalcLocalPointFrom(new Vector2D(200, 300))).toEqual(
+        expect(canvas.calcLocalPointFrom(new Vector2D(200, 300))).toEqual(
           new Vector2D(180, 280)
         );
       });

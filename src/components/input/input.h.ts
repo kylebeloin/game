@@ -3,12 +3,12 @@ import { IComponent } from "@/systems";
 export interface IInputComponent extends IComponent {}
 
 export interface IClickInputComponent extends IInputComponent {
-  HandleClick(e: MouseEvent): void;
+  handleClick(e: MouseEvent): void;
 }
 
 export interface IKeyInputComponent extends IInputComponent {
-  HandleKeyDown(e: KeyboardEvent): void;
-  HandleKeyUp(e: KeyboardEvent): void;
+  handleKeyDown(e: KeyboardEvent): void;
+  handleKeyUp(e: KeyboardEvent): void;
 }
 
 // Wraps up all input types.

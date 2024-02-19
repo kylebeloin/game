@@ -11,36 +11,36 @@ describe(">>> Grid", () => {
   });
 
   it("should awake and update all children", () => {
-    const spyNodeAwake = jest.spyOn(Node.prototype, "Awake");
-    const spyNodeUpdate = jest.spyOn(Node.prototype, "Update");
+    const spyNodeAwake = jest.spyOn(Node.prototype, "awake");
+    const spyNodeUpdate = jest.spyOn(Node.prototype, "update");
 
     expect(spyNodeAwake).not.toHaveBeenCalled();
     expect(spyNodeUpdate).not.toHaveBeenCalled();
 
-    grid.Awake();
+    grid.awake();
     expect(spyNodeAwake).toHaveBeenCalledTimes(nodeCount);
 
-    grid.Update(0);
+    grid.update(0);
     expect(spyNodeUpdate).toHaveBeenCalledTimes(nodeCount);
   });
 
   it("should awake and update all Components", () => {
     const spyDrawCompAwake = jest.spyOn(
       GridOnClickComponent.prototype,
-      "Awake"
+      "awake"
     );
     const spyDrawCompUpdate = jest.spyOn(
       GridOnClickComponent.prototype,
-      "Update"
+      "update"
     );
 
     expect(spyDrawCompAwake).not.toHaveBeenCalled();
     expect(spyDrawCompUpdate).not.toHaveBeenCalled();
 
-    grid.Awake();
+    grid.awake();
     expect(spyDrawCompAwake).toHaveBeenCalled();
 
-    grid.Update(0);
+    grid.update(0);
     expect(spyDrawCompUpdate).toHaveBeenCalled();
   });
 });

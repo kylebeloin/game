@@ -4,49 +4,49 @@ import { NodeDrawComponent } from "./components";
 
 export class Node extends Entity {
   constructor(
-    public readonly Start: Vector2D,
-    public readonly End: Vector2D,
-    public readonly Index: Vector2D
+    public readonly start: Vector2D,
+    public readonly end: Vector2D,
+    public readonly index: Vector2D
   ) {
     super();
   }
 
-  public IsActive = false;
+  public isActive = false;
 
-  public get Size(): Vector2D {
-    return new Vector2D(this.End.x - this.Start.x, this.End.y - this.Start.y);
+  public get size(): Vector2D {
+    return new Vector2D(this.end.x - this.start.x, this.end.y - this.start.y);
   }
 
-  public get Center(): Vector2D {
+  public get center(): Vector2D {
     return new Vector2D(
-      this.Start.x + this.Size.x / 2,
-      this.Start.y + this.Size.y / 2
+      this.start.x + this.size.x / 2,
+      this.start.y + this.size.y / 2
     );
   }
 
-  public Occupies(point: Vector2D): boolean {
-    if (point.x < this.Start.x) {
+  public occupies(point: Vector2D): boolean {
+    if (point.x < this.start.x) {
       return false;
     }
 
-    if (point.x > this.End.x) {
+    if (point.x > this.end.x) {
       return false;
     }
 
-    if (point.y < this.Start.y) {
+    if (point.y < this.start.y) {
       return false;
     }
 
-    if (point.y > this.End.y) {
+    if (point.y > this.end.y) {
       return false;
     }
 
     return true;
   }
 
-  public Awake(): void {
-    this.AddComponent(new NodeDrawComponent());
+  public awake(): void {
+    this.addComponent(new NodeDrawComponent());
 
-    super.Awake();
+    super.awake();
   }
 }

@@ -13,29 +13,29 @@ class EntityRegistry {
     instance = this;
   }
 
-  public Register<E extends Entity>(entity: E): void {
+  public register<E extends Entity>(entity: E): void {
     _registry.set(entity, { id: id++, components: new Map() });
   }
 
-  public Get<E extends Entity>(entity: E | number): IRegisteredEntity {
+  public get<E extends Entity>(entity: E | number): IRegisteredEntity {
     if (typeof entity === "number") {
       for (let [instance, registeredEntity] of _registry) {
         if (registeredEntity.id === entity)
-          return this.Get(instance) as IRegisteredEntity;
+          return this.get(instance) as IRegisteredEntity;
       }
       throw new Error("Entity not found.");
     }
     if (!_registry.has(entity)) {
-      this.Register(entity);
+      this.register(entity);
     }
     return _registry.get(entity) as IRegisteredEntity;
   }
 
-  public Has<E extends Entity>(entity: E): boolean {
+  public has<E extends Entity>(entity: E): boolean {
     return _registry.has(entity);
   }
 
-  public Destroy<E extends Entity>(entity: E): void {
+  public destroy<E extends Entity>(entity: E): void {
     _registry.delete(entity);
   }
 }

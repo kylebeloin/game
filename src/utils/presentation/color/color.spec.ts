@@ -27,17 +27,17 @@ describe(">>> Color", () => {
   });
 
   it("should throw an error if cannot instantiate from string", () => {
-    expect(() => Color.FromString("")).toThrow();
-    expect(() => Color.FromString("?")).toThrow();
-    expect(() => Color.FromString("rgba()")).toThrow();
-    expect(() => Color.FromString("rgba(1)")).toThrow();
-    expect(() => Color.FromString("rgba(1,2)")).toThrow();
-    expect(() => Color.FromString("rgba(1,2,3)")).toThrow();
+    expect(() => Color.fromString("")).toThrow();
+    expect(() => Color.fromString("?")).toThrow();
+    expect(() => Color.fromString("rgba()")).toThrow();
+    expect(() => Color.fromString("rgba(1)")).toThrow();
+    expect(() => Color.fromString("rgba(1,2)")).toThrow();
+    expect(() => Color.fromString("rgba(1,2,3)")).toThrow();
   });
 
   it("should instantiate from hex string", () => {
     const hex = "#ffffff";
-    const rgba = Color.FromHex(hex);
+    const rgba = Color.fromHex(hex);
     expect(rgba.R).toEqual(255);
     expect(rgba.G).toEqual(255);
     expect(rgba.B).toEqual(255);
@@ -45,7 +45,7 @@ describe(">>> Color", () => {
   });
 
   it("should instantiate from rgba string", () => {
-    const rgba = Color.FromString("rgba(255,255,255,1)");
+    const rgba = Color.fromString("rgba(255,255,255,1)");
     expect(rgba.R).toEqual(255);
     expect(rgba.G).toEqual(255);
     expect(rgba.B).toEqual(255);

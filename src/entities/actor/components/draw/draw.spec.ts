@@ -5,14 +5,14 @@ describe(">>> Node Actor Component", () => {
   let comp: ActorDrawComponent;
   beforeEach(() => {
     comp = new ActorDrawComponent();
-    comp.Entity = mockActorFactory();
+    comp.entity = mockActorFactory();
   });
 
   it("should cleanup when awakens", () => {
     const spy = jest.spyOn(CanvasLayer.Foreground, "ClearRect");
     expect(spy).not.toHaveBeenCalled();
 
-    comp.Awake();
+    comp.awake();
 
     expect(spy).toHaveBeenCalled();
   });
@@ -24,7 +24,7 @@ describe(">>> Node Actor Component", () => {
     expect(spyClearRect).not.toHaveBeenCalled();
     expect(spyFillRect).not.toHaveBeenCalled();
 
-    comp.Update(0);
+    comp.update(0);
 
     expect(spyClearRect).toHaveBeenCalled();
     expect(spyFillRect).toHaveBeenCalled();

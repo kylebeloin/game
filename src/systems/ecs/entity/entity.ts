@@ -10,24 +10,24 @@ import registry from "./registry";
 
 export abstract class Entity implements IEntity {
   public get id() {
-    return registry.Get(this).id;
+    return registry.get(this).id;
   }
 
   constructor() {
-    registry.Register(this);
+    registry.register(this);
   }
 
-  public Update(deltaTime: number): void {
+  public update(deltaTime: number): void {
     for (let component of this._components.values())
-      component.Update(deltaTime);
+      component.update(deltaTime);
   }
 
-  public Awake(): void {
-    for (let component of this._components.values()) component.Awake();
+  public awake(): void {
+    for (let component of this._components.values()) component.awake();
   }
 
   protected _components: InstanceMap<IComponent> =
-    registry.Get(this).components;
+    registry.get(this).components;
 
   public get Components(): InstanceMap<IComponent> {
     return this._components;
@@ -39,8 +39,8 @@ export abstract class Entity implements IEntity {
    * @returns {IComponent}
    * @throws If component not present on entity
    */
-  public GetComponent<C extends IComponent>(constructor: Constructor<C>): C {
-    if (!this.HasComponent(constructor)) {
+  public getComponent<C extends IComponent>(constructor: Constructor<C>): C {
+    if (!this.hasComponent(constructor)) {
       throw new Error("Component does not exist on entity.");
     }
     if (isAbstractConstructor(constructor)) {
@@ -57,7 +57,7 @@ export abstract class Entity implements IEntity {
    * @param component - Component to add to entity
    * @returns
    */
-  public AddComponent<C extends IComponent>(
+  public addComponent<C extends IComponent>(
     component: C | InstanceConstructor<C>
   ): C {
     if (typeof component === "function") component = new component();
@@ -65,17 +65,17 @@ export abstract class Entity implements IEntity {
       component.constructor as Constructor<IComponent>,
       component
     );
-    component.Entity = this;
+    component.entity = this;
     return component;
   }
 
-  public RemoveComponent<C extends IComponent>(
+  public removeComponent<C extends IComponent>(
     constructor: Constructor<C>
   ): void {
     this._components.delete(constructor);
   }
 
-  public HasComponent<C extends IComponent>(
+  public hasComponent<C extends IComponent>(
     constructor: Constructor<C>
   ): boolean {
     if (isAbstractConstructor(constructor)) {

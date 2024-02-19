@@ -12,22 +12,22 @@ export class GameInputComponent
   extends InputComponent<Game>
   implements InputComponents<IClickInputComponent>
 {
-  public Entity!: Game;
+  public entity!: Game;
 
-  public Awake(): void {
+  public awake(): void {
     document.body.addEventListener("click", this.HandleClick.bind(this));
   }
 
   public HandleClick(e: MouseEvent): void {
-    const point = CanvasLayer.Background.CalcLocalPointFrom(
+    const point = CanvasLayer.Background.calcLocalPointFrom(
       new Vector2D(e.clientX, e.clientY)
     );
     if (!point) return;
 
-    for (const entity of this.Entity.Entities) {
-      if (!entity.HasComponent(OnClickComponent<Grid>)) continue;
+    for (const entity of this.entity.entities) {
+      if (!entity.hasComponent(OnClickComponent<Grid>)) continue;
 
-      entity.GetComponent(OnClickComponent<Grid>).ClickOn(point);
+      entity.getComponent(OnClickComponent<Grid>).clickOn(point);
     }
   }
 }

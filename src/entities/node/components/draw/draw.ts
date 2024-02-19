@@ -4,40 +4,40 @@ import { Node } from "@/entities/node";
 import { Settings } from "@/settings";
 
 export class NodeDrawComponent implements IComponent {
-  public Entity!: Node;
+  public entity!: Node;
 
-  public Awake(): void {
+  public awake(): void {
     // to implement
-    this.Clear();
+    this.clear();
   }
 
-  public Update(_: number): void {
+  public update(_: number): void {
     // to implement
-    this.Clear();
-    this.Draw();
-    this.DrawDebugInfo();
+    this.clear();
+    this.draw();
+    this.drawDebugInfo();
   }
 
-  private Draw(): void {
-    CanvasLayer.Background.FillRect(
-      this.Entity.Start,
-      this.Entity.Size,
-      this.Entity.IsActive
+  private draw(): void {
+    CanvasLayer.Background.fillRect(
+      this.entity.start,
+      this.entity.size,
+      this.entity.isActive
         ? Settings.grid.color.active
         : Settings.grid.color.default
     );
   }
 
-  private DrawDebugInfo(): void {
-    const entity = this.Entity;
-    CanvasLayer.Background.DrawText(
-      `${entity.Index.x}, ${entity.Index.y}`,
-      entity.Start,
+  private drawDebugInfo(): void {
+    const entity = this.entity;
+    CanvasLayer.Background.drawText(
+      `${entity.index.x}, ${entity.index.y}`,
+      entity.start,
       new Color(255, 255, 255, 1)
     );
   }
 
-  private Clear(): void {
-    CanvasLayer.Background.ClearRect(this.Entity.Start, this.Entity.Size);
+  private clear(): void {
+    CanvasLayer.Background.clearRect(this.entity.start, this.entity.size);
   }
 }

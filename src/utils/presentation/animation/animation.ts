@@ -10,7 +10,7 @@ export class Animation implements IAwake, IUpdate {
     this.SpriteSheet = spriteSheet;
   }
 
-  public Awake(): void {
+  public awake(): void {
     this._img.src = this.SpriteSheet;
     this._img.onload = () => {
       // ...
@@ -26,5 +26,5 @@ export class Animation implements IAwake, IUpdate {
     }
   }
 
-  public Update(deltaTime: number): void {}
+  public update(deltaTime: number): void {}
 }

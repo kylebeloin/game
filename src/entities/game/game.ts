@@ -8,19 +8,19 @@ export class Game extends Entity {
 
   private _lastTimestamp = 0;
 
-  public get Entities(): Array<Entity> {
+  public get entities(): Array<Entity> {
     return this._entities;
   }
 
-  public Awake(): void {
-    this.AddComponent(new GameInputComponent());
+  public awake(): void {
+    this.addComponent(new GameInputComponent());
 
-    super.Awake();
+    super.awake();
     let grid = new Grid();
     this._entities.push(grid, new Group(Team.A, grid), new Group(Team.B, grid));
 
     for (const entity of this._entities) {
-      entity.Awake();
+      entity.awake();
     }
 
     window.requestAnimationFrame(() => {
@@ -28,22 +28,22 @@ export class Game extends Entity {
       this._lastTimestamp = window.performance.timeOrigin;
 
       // start update loop
-      this.Update();
+      this.update();
     });
   }
 
-  public Update(): void {
+  public update(): void {
     const deltaTime = (window.performance.now() - this._lastTimestamp) / 1000;
-    super.Update(deltaTime);
+    super.update(deltaTime);
 
     // awake all children
     for (const entity of this._entities) {
-      entity.Update(deltaTime);
+      entity.update(deltaTime);
     }
 
     window.requestAnimationFrame(() => {
       this._lastTimestamp = window.performance.now();
-      this.Update();
+      this.update();
     });
   }
 }

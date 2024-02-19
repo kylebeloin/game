@@ -5,36 +5,36 @@ import { Settings } from "@/settings";
 import { DrawComponent } from "@/components";
 
 export class ActorDrawComponent extends DrawComponent<Actor> {
-  private get Position(): Vector2D {
-    return this.Entity.Position!;
+  private get position(): Vector2D {
+    return this.entity.position!;
   }
 
-  public Update(_: number): void {
-    if (!this.Position) return;
-    this.Clear();
-    this.Draw();
+  public update(_: number): void {
+    if (!this.position) return;
+    this.clear();
+    this.draw();
   }
 
-  public Awake(): void {
-    if (this.Position) this.Clear();
+  public awake(): void {
+    if (this.position) this.clear();
   }
 
-  protected Draw(): void {
+  protected draw(): void {
     const colors = Settings.actors.colors;
-    const color = this.Entity.Factory.Team === Team.A ? colors.a : colors.b;
+    const color = this.entity.Factory.Team === Team.A ? colors.a : colors.b;
 
-    CanvasLayer.Foreground.FillCircle(
-      this.Position,
+    CanvasLayer.Foreground.fillCircle(
+      this.position,
       Settings.actors.radius,
       color
     );
   }
 
-  protected Clear(): void {
-    CanvasLayer.Foreground.ClearRect(
+  protected clear(): void {
+    CanvasLayer.Foreground.clearRect(
       new Vector2D(
-        this.Position.x - Settings.grid.nodeSize / 2,
-        this.Position.y - Settings.grid.nodeSize / 2
+        this.position.x - Settings.grid.nodeSize / 2,
+        this.position.y - Settings.grid.nodeSize / 2
       ),
       new Vector2D(Settings.grid.nodeSize, Settings.grid.nodeSize)
     );
