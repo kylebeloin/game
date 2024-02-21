@@ -31,7 +31,8 @@ export class PlayerTransformComponent extends TransformComponent<Player> {
     return this._scale;
   }
 
-  constructor() {
+  constructor(position: Vector2D = new Vector2D(0, 0)) {
     super();
+    this._position = position;
   }
 }

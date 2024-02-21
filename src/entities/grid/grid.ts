@@ -1,25 +1,25 @@
 import { Entity } from "@/systems";
 import { Vector2D } from "@/utils";
-import { Node } from "@/entities";
+import { Tile } from "@/entities";
 import { Settings } from "@/settings";
 import { GridOnClickComponent } from "./components";
 
 export class Grid extends Entity {
-  private _nodes: Node[] = [];
+  private _tiles: Tile[] = [];
 
-  public get nodes(): Node[] {
-    return this._nodes;
+  public get tiles(): Tile[] {
+    return this._tiles;
   }
 
   public awake(): void {
     this.addComponent(new GridOnClickComponent());
     // awake components
     super.awake();
-    this.initNodes();
+    this.initTiles();
 
     // awake children
-    for (const node of this._nodes) {
-      node.awake();
+    for (const tile of this._tiles) {
+      tile.awake();
     }
   }
 
@@ -28,14 +28,14 @@ export class Grid extends Entity {
     super.update(deltaTime);
 
     // update children
-    for (const node of this._nodes) {
-      node.update(deltaTime);
+    for (const tile of this._tiles) {
+      tile.update(deltaTime);
     }
   }
 
-  private initNodes(): void {
-    const size = Settings.grid.nodeSize;
-    const offset = Settings.grid.nodeOffset;
+  private initTiles(): void {
+    const size = Settings.grid.tileSize;
+    const offset = Settings.grid.tileOffset;
     for (
       let index = 0;
       index < Settings.grid.dimension * Settings.grid.dimension;
@@ -48,8 +48,8 @@ export class Grid extends Entity {
         y * (size + offset) + offset
       );
       const end = new Vector2D(start.x + size, start.y + size);
-      const node = new Node(start, end, new Vector2D(x, y));
-      this._nodes.push(node);
+      const node = new Tile(start, end, new Vector2D(x, y));
+      this._tiles.push(node);
     }
   }
 }

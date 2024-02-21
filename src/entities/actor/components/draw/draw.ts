@@ -33,10 +33,10 @@ export class ActorDrawComponent extends DrawComponent<Actor> {
   protected clear(): void {
     CanvasLayer.Foreground.clearRect(
       new Vector2D(
-        this.position.x - Settings.grid.nodeSize / 2,
-        this.position.y - Settings.grid.nodeSize / 2
+        this.position.x - Settings.grid.tileSize / 2,
+        this.position.y - Settings.grid.tileSize / 2
       ),
-      new Vector2D(Settings.grid.nodeSize, Settings.grid.nodeSize)
+      new Vector2D(Settings.grid.tileSize, Settings.grid.tileSize)
     );
   }
 }

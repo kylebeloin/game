@@ -3,12 +3,19 @@ import { Team } from "@/team";
 import { Actor, Grid } from "@/entities";
 import { Player } from "@/scenes";
 import { Settings } from "@/settings";
+import { GroupInputComponent } from "./components";
+import { Vector2D } from "@/utils";
 
 export class Group extends Entity {
   private readonly _actors: Actor[] = [];
 
+  public get actors() {
+    return this._actors;
+  }
+
   public constructor(public readonly team: Team, private readonly _grid: Grid) {
     super();
+    this.addComponent(new GroupInputComponent());
   }
 
   public awake(): void {
@@ -27,7 +34,7 @@ export class Group extends Entity {
   private prepareActors(): void {
     if (this.team !== Team.Player) {
       const dimension = Settings.grid.dimension;
-      const nodes = this._grid.nodes;
+      const nodes = this._grid.tiles;
       const groupSize = Settings.actors.groupSize;
 
       for (let i = 0; i < groupSize; i++) {
@@ -46,8 +53,15 @@ export class Group extends Entity {
 
   private preparePlayers(): void {
     // to implement
-    const middleNode =
-      this._grid.nodes[Math.floor(this._grid.nodes.length / 2)];
+    const loc = Vector2D.lerp(
+      this._grid.tiles[0].location,
+      this._grid.tiles[this._grid.tiles.length - 1].location,
+      0.5
+    );
+    console.log(loc, Settings.grid.dimension);
+    const i = Math.ceil(loc.y) * Settings.grid.dimension + Math.ceil(loc.x);
+
+    const middleNode = this._grid.tiles[i];
     const player = new Player(this, middleNode);
     this._actors.push(player);
     player.awake();

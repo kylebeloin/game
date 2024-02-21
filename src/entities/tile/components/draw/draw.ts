@@ -1,10 +1,10 @@
 import type { IComponent } from "@/systems";
 import { CanvasLayer, Color, Vector2D } from "@/utils";
-import { Node } from "@/entities/node";
+import { Tile } from "@/entities/tile";
 import { Settings } from "@/settings";
 
-export class NodeDrawComponent implements IComponent {
-  public entity!: Node;
+export class TileDrawComponent implements IComponent {
+  public entity!: Tile;
 
   public awake(): void {
     // to implement
@@ -31,8 +31,17 @@ export class NodeDrawComponent implements IComponent {
   private drawDebugInfo(): void {
     const entity = this.entity;
     CanvasLayer.Background.drawText(
-      entity.index.asString(),
+      entity.location.asString(),
       Vector2D.sub(entity.end, new Vector2D(entity.size.x, 0)),
+      new Color(0, 0, 0, 1)
+    );
+
+    CanvasLayer.Background.drawText(
+      entity.index.toString(),
+      Vector2D.add(
+        entity.start,
+        new Vector2D(entity.size.x - entity.index.toString().length * 7, 8)
+      ),
       new Color(0, 0, 0, 1)
     );
   }

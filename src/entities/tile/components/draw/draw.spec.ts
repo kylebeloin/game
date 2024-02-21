@@ -1,14 +1,14 @@
-import { NodeDrawComponent } from "./draw";
+import { TileDrawComponent } from "./draw";
 import { CanvasLayer } from "@/utils";
 import { Settings } from "@/settings";
 
-import { mockNodeFactory } from "@/entities/node";
+import { mockTileFactory } from "@/entities/tile";
 
 describe(">>> Node Draw Component", () => {
-  let comp: NodeDrawComponent;
+  let comp: TileDrawComponent;
   beforeEach(() => {
-    comp = new NodeDrawComponent();
-    comp.entity = mockNodeFactory();
+    comp = new TileDrawComponent();
+    comp.entity = mockTileFactory();
   });
 
   it("should cleanup when awakens", () => {

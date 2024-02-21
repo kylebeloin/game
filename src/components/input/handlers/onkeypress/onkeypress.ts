@@ -15,9 +15,7 @@ export abstract class OnKeyPressComponent<T extends Entity>
   public abstract keysPressed: Set<string>;
 
   public keyDown(e: KeyboardEvent): void {
-    console.log("keyDown", this.keys);
     if (this.keys.has(e.key)) {
-      console.log("keyDown", e.key);
       this.keysPressed.add(e.key);
     }
   }

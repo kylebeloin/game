@@ -1,5 +1,5 @@
 import { GridOnClickComponent } from "./components";
-import { Node, Grid } from "@/entities";
+import { Tile, Grid } from "@/entities";
 import { Settings } from "@/settings";
 
 describe(">>> Grid", () => {
@@ -11,8 +11,8 @@ describe(">>> Grid", () => {
   });
 
   it("should awake and update all children", () => {
-    const spyNodeAwake = jest.spyOn(Node.prototype, "awake");
-    const spyNodeUpdate = jest.spyOn(Node.prototype, "update");
+    const spyNodeAwake = jest.spyOn(Tile.prototype, "awake");
+    const spyNodeUpdate = jest.spyOn(Tile.prototype, "update");
 
     expect(spyNodeAwake).not.toHaveBeenCalled();
     expect(spyNodeUpdate).not.toHaveBeenCalled();

@@ -11,8 +11,8 @@ export const Settings = Object.freeze({
   },
   grid: {
     dimension: 10,
-    nodeSize: 50,
-    nodeOffset: 0,
+    tileSize: 50,
+    tileOffset: 0,
     color: {
       default: new Color(255, 255, 255, 1),
       active: new Color(176, 190, 197, 1),

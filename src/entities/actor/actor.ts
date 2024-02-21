@@ -1,7 +1,7 @@
 import { Vector2D } from "@/utils";
 import { Entity } from "@/systems";
 
-import { Node } from "@/entities/node";
+import { Tile } from "@/entities/tile";
 import { Group } from "@/entities/group";
 import { ActorDrawComponent, ActorLocomotionComponent } from "./components";
 
@@ -17,7 +17,7 @@ export class Actor extends Entity {
     return this.getComponent(ActorLocomotionComponent);
   }
 
-  constructor(public readonly factory: Group, node: Node) {
+  constructor(public readonly factory: Group, node: Tile) {
     super();
     this.addComponent(new ActorLocomotionComponent(node));
   }

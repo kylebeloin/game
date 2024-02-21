@@ -1,6 +1,6 @@
-import { Actor, mockGroupFactory, mockNodeFactory } from "@/entities";
+import { Actor, mockGroupFactory, mockTileFactory } from "@/entities";
 
 export const mockActorFactory = (
   group = mockGroupFactory(),
-  node = mockNodeFactory()
+  node = mockTileFactory()
 ): Actor => new Actor(group, node);

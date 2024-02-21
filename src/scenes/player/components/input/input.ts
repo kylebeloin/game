@@ -15,7 +15,6 @@ export class PlayerInputComponent extends OnKeyPressComponent<Player> {
 
   public keyDown(e: KeyboardEvent): void {
     super.keyDown(e);
-    console.log(this.entity.position);
     switch (e.key) {
       case Directions.Up:
         this.entity.transform.translate(new Vector2D(0, -1));

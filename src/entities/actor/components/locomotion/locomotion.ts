@@ -1,34 +1,43 @@
-import { Actor, Node } from "@/entities";
+import { Actor, Tile } from "@/entities";
 import { LocomotionComponent } from "@/components";
 import { Vector2D } from "@/utils";
 
+/**
+ * Handles movement of actor entity across tiles.
+ */
 export class ActorLocomotionComponent extends LocomotionComponent<Actor> {
-  constructor(node: Node) {
+  constructor(tile: Tile) {
     super();
-    this._node = node;
+    this._tile = tile;
   }
 
   public entity!: Actor;
   /**
    * It is possible for an actor to stand nowhere; in this case, it is null.
    */
-  protected _node: Node | null = null;
+  protected _tile: Tile | null = null;
+  private _lastPosition: Vector2D | null = null;
 
-  public get node(): Node | null {
-    return this._node;
+  public get tile(): Tile | null {
+    return this._tile;
   }
 
-  public set node(value: Node) {
-    this._node = value;
-    this._node.actor = this.entity;
+  public set tile(value: Tile) {
+    this._lastPosition = value.center;
+    this._tile = value;
+    this._tile.actor = this.entity;
   }
 
   public get position(): Vector2D | null {
-    return this.node ? this.node.center : null;
+    return this.tile ? this.tile.center : null;
+  }
+
+  public get lastPosition(): Vector2D | null {
+    return this._lastPosition;
   }
 
   public awake(): void {
-    if (this._node) this._node.actor = this.entity;
+    if (this._tile) this._tile.actor = this.entity;
   }
 
   public update(_: number): void {
