@@ -3,6 +3,9 @@ import { Player } from "../..";
 import { Vector2D } from "@/utils";
 
 export class PlayerTransformComponent extends TransformComponent<Player> {
+  /**
+   * Position here can be a node, or a pixel.
+   */
   private _position: Vector2D = new Vector2D(0, 0);
   private _rotation: number = 0;
   private _scale: Vector2D = new Vector2D(1, 1);
@@ -28,20 +31,7 @@ export class PlayerTransformComponent extends TransformComponent<Player> {
     return this._scale;
   }
 
-  public translate(vector: Vector2D): void {
-    super.translate(vector);
-  }
-
-  public rotate(angle: number): void {
-    super.rotate(angle);
-  }
-
-  public scaleBy(vector: Vector2D): void {
-    super.scaleBy(vector);
-  }
-
-  constructor(entity: Player) {
+  constructor() {
     super();
-    this.entity = entity;
   }
 }

@@ -9,6 +9,7 @@ export class GridOnClickComponent extends OnClickComponent<Grid> {
   public update(_: number): void {}
 
   public clickOn(point: Vector2D): void {
+    console.log(this.entity);
     for (const node of this.entity.nodes) {
       node.isActive = node.occupies(point);
     }

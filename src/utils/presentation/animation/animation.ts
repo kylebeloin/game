@@ -3,21 +3,21 @@ import { IAwake, IUpdate } from "@/utils";
 export class Animation implements IAwake, IUpdate {
   private _img = new Image();
 
-  public SpriteSheet: string;
-  public CurrentFrame?: ImageBitmap;
+  public imgSrc: string;
+  public currentFrame?: ImageBitmap;
 
-  public constructor(spriteSheet: string) {
-    this.SpriteSheet = spriteSheet;
+  public constructor(src: string) {
+    this.imgSrc = src;
   }
 
   public awake(): void {
-    this._img.src = this.SpriteSheet;
+    this._img.src = this.imgSrc;
     this._img.onload = () => {
       // ...
     };
   }
 
-  public *Frames(frames: Array<ImageBitmap>): IterableIterator<ImageBitmap> {
+  public *frames(frames: Array<ImageBitmap>): IterableIterator<ImageBitmap> {
     for (let i = 0; ; i++) {
       if (i === frames.length) {
         i = 0;
@@ -26,5 +26,5 @@ export class Animation implements IAwake, IUpdate {
     }
   }
 
-  public update(deltaTime: number): void {}
+  public update(_: number): void {}
 }

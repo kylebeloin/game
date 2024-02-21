@@ -12,7 +12,7 @@ describe(">>> Node Draw Component", () => {
   });
 
   it("should cleanup when awakens", () => {
-    const spy = jest.spyOn(CanvasLayer.Background, "ClearRect");
+    const spy = jest.spyOn(CanvasLayer.Background, "clearRect");
     expect(spy).not.toHaveBeenCalled();
 
     comp.awake();
@@ -21,8 +21,8 @@ describe(">>> Node Draw Component", () => {
   });
 
   it("should cleanup and draw rect every frame", () => {
-    const spyClearRect = jest.spyOn(CanvasLayer.Background, "ClearRect");
-    const spyFillRect = jest.spyOn(CanvasLayer.Background, "FillRect");
+    const spyClearRect = jest.spyOn(CanvasLayer.Background, "clearRect");
+    const spyFillRect = jest.spyOn(CanvasLayer.Background, "fillRect");
 
     expect(spyClearRect).not.toHaveBeenCalled();
     expect(spyFillRect).not.toHaveBeenCalled();
@@ -34,7 +34,7 @@ describe(">>> Node Draw Component", () => {
   });
 
   it("should render active color if entity is active and regular color otherwise", () => {
-    const spyFillRect = jest.spyOn(CanvasLayer.Background, "FillRect");
+    const spyFillRect = jest.spyOn(CanvasLayer.Background, "fillRect");
 
     comp.entity.isActive = true;
     comp.update(0);

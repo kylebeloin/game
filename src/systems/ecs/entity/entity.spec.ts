@@ -32,15 +32,15 @@ describe("Entity", () => {
     function count(map: Map<any, any>): number {
       return Array.from(map.entries()).length;
     }
-    expect(count(e.Components)).toBe(0);
+    expect(count(e.components)).toBe(0);
     e.addComponent(new C1());
     e.addComponent(new C2());
     e.addComponent(new C3());
 
-    expect(count(e.Components)).toBe(3);
+    expect(count(e.components)).toBe(3);
 
     e.removeComponent(C2);
-    expect(count(e.Components)).toBe(2);
+    expect(count(e.components)).toBe(2);
 
     expect(e.hasComponent(C1)).toBeTruthy();
     expect(e.hasComponent(C3)).toBeTruthy();

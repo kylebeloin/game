@@ -9,7 +9,7 @@ describe(">>> Node", () => {
   let node: Node;
 
   beforeEach(() => {
-    node = new Node(start, end, index);
+    node = new Node(start, end, index, []);
   });
 
   it("should awake and update all Components", () => {

@@ -1,5 +1,4 @@
 import type { IRegisteredEntity } from "./registry.h";
-import { Constructor } from "@/utils";
 import type { Entity } from "..";
 
 let instance: EntityRegistry | null = null;

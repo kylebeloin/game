@@ -1,12 +1,16 @@
 import { Vector2D } from "@/utils";
 import { Entity } from "@/systems";
 import { NodeDrawComponent } from "./components";
+import { Actor } from "..";
 
 export class Node extends Entity {
+  public actor: Actor | null = null;
+
   constructor(
     public readonly start: Vector2D,
     public readonly end: Vector2D,
-    public readonly index: Vector2D
+    public readonly index: Vector2D,
+    public readonly neighbors: Array<Node> = []
   ) {
     super();
   }

@@ -9,7 +9,7 @@ describe(">>> Node Actor Component", () => {
   });
 
   it("should cleanup when awakens", () => {
-    const spy = jest.spyOn(CanvasLayer.Foreground, "ClearRect");
+    const spy = jest.spyOn(CanvasLayer.Foreground, "clearRect");
     expect(spy).not.toHaveBeenCalled();
 
     comp.awake();
@@ -18,8 +18,8 @@ describe(">>> Node Actor Component", () => {
   });
 
   it("should cleanup and draw rect every frame", () => {
-    const spyClearRect = jest.spyOn(CanvasLayer.Foreground, "ClearRect");
-    const spyFillRect = jest.spyOn(CanvasLayer.Foreground, "FillCircle");
+    const spyClearRect = jest.spyOn(CanvasLayer.Foreground, "clearRect");
+    const spyFillRect = jest.spyOn(CanvasLayer.Foreground, "fillCircle");
 
     expect(spyClearRect).not.toHaveBeenCalled();
     expect(spyFillRect).not.toHaveBeenCalled();

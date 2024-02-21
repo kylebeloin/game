@@ -12,8 +12,9 @@ describe(">>> Grid Click Component", () => {
   });
 
   it("should update node if clicked within its range", () => {
-    comp.clickOn(new Vector2D(100, 100));
-    expect(comp.entity.nodes[0].isActive).toBeTruthy();
+    const node = comp.entity.nodes[0];
+    comp.clickOn(Vector2D.sub(node.end, new Vector2D(1, 1)));
+    expect(node.isActive).toBeTruthy();
     expect(comp.entity.nodes[1].isActive).toBeFalsy();
   });
 });

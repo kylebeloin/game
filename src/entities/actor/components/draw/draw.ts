@@ -21,7 +21,7 @@ export class ActorDrawComponent extends DrawComponent<Actor> {
 
   protected draw(): void {
     const colors = Settings.actors.colors;
-    const color = this.entity.Factory.Team === Team.A ? colors.a : colors.b;
+    const color = this.entity.factory?.team === Team.A ? colors.a : colors.b;
 
     CanvasLayer.Foreground.fillCircle(
       this.position,

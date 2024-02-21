@@ -29,7 +29,7 @@ export abstract class Entity implements IEntity {
   protected _components: InstanceMap<IComponent> =
     registry.get(this).components;
 
-  public get Components(): InstanceMap<IComponent> {
+  public get components(): InstanceMap<IComponent> {
     return this._components;
   }
 

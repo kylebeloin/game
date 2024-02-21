@@ -1,5 +1,5 @@
 import type { IComponent } from "@/systems";
-import { CanvasLayer, Color } from "@/utils";
+import { CanvasLayer, Color, Vector2D } from "@/utils";
 import { Node } from "@/entities/node";
 import { Settings } from "@/settings";
 
@@ -31,9 +31,9 @@ export class NodeDrawComponent implements IComponent {
   private drawDebugInfo(): void {
     const entity = this.entity;
     CanvasLayer.Background.drawText(
-      `${entity.index.x}, ${entity.index.y}`,
-      entity.start,
-      new Color(255, 255, 255, 1)
+      entity.index.asString(),
+      Vector2D.sub(entity.end, new Vector2D(entity.size.x, 0)),
+      new Color(0, 0, 0, 1)
     );
   }
 

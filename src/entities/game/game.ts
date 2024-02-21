@@ -17,7 +17,12 @@ export class Game extends Entity {
 
     super.awake();
     let grid = new Grid();
-    this._entities.push(grid, new Group(Team.A, grid), new Group(Team.B, grid));
+    this._entities.push(
+      grid,
+      new Group(Team.A, grid),
+      new Group(Team.B, grid),
+      new Group(Team.Player, grid)
+    );
 
     for (const entity of this._entities) {
       entity.awake();
