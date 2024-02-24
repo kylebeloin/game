@@ -23,7 +23,7 @@ export class ActorLocomotionComponent extends LocomotionComponent<Actor> {
   }
 
   public set tile(value: Tile) {
-    this._lastPosition = value.center;
+    this._lastPosition = this.position;
     this._tile = value;
     this._tile.actor = this.entity;
   }

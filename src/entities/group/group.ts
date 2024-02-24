@@ -38,11 +38,11 @@ export class Group extends Entity {
       const groupSize = Settings.actors.groupSize;
 
       for (let i = 0; i < groupSize; i++) {
-        const node =
+        const tile =
           this.team == Team.A
             ? nodes[i * dimension]
             : nodes[nodes.length - 1 - i * dimension];
-        const actor = new Actor(this, node);
+        const actor = new Actor(this, tile);
         this._actors.push(actor);
         actor.awake();
       }
@@ -58,7 +58,6 @@ export class Group extends Entity {
       this._grid.tiles[this._grid.tiles.length - 1].location,
       0.5
     );
-    console.log(loc, Settings.grid.dimension);
     const i = Math.ceil(loc.y) * Settings.grid.dimension + Math.ceil(loc.x);
 
     const middleNode = this._grid.tiles[i];

@@ -14,15 +14,15 @@ export abstract class OnKeyPressComponent<T extends Entity>
 
   public abstract keysPressed: Set<string>;
 
-  public keyDown(e: KeyboardEvent): void {
-    if (this.keys.has(e.key)) {
-      this.keysPressed.add(e.key);
+  public keyDown(key: string): void {
+    if (this.keys.has(key)) {
+      this.keysPressed.add(key);
     }
   }
 
-  public keyUp(e: KeyboardEvent): void {
-    if (this.keysPressed.has(e.key)) {
-      this.keysPressed.delete(e.key);
+  public keyUp(key: string): void {
+    if (this.keysPressed.has(key)) {
+      this.keysPressed.delete(key);
     }
   }
 }

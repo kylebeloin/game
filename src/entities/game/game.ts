@@ -2,6 +2,11 @@ import { Entity } from "@/systems";
 import { Grid, Group } from "@/entities";
 import { Team } from "@/team";
 import { GameInputComponent } from "./components";
+import { Settings } from "@/settings";
+import { logger } from "@/utils";
+
+const interval = 1000 / Settings.game.fps;
+let fps = 0;
 
 export class Game extends Entity {
   private _entities: Array<Entity> = [];
@@ -32,17 +37,28 @@ export class Game extends Entity {
     });
   }
 
-  public update(): void {
-    const deltaTime = (window.performance.now() - this._lastTimestamp) / 1000;
-    super.update(deltaTime);
+  @logger
+  public frame(current: number): void {
+    fps = current > Settings.game.fps - 1 ? 0 : 1 + current;
+  }
 
-    // awake all children
-    for (const entity of this._entities) {
-      entity.update(deltaTime);
+  public update(): void {
+    const now = window.performance.now();
+    const elapsed = now - this._lastTimestamp;
+
+    if (elapsed > interval) {
+      super.update(elapsed);
+
+      // awake all children
+      for (const entity of this._entities) {
+        entity.update(elapsed);
+      }
+      this.frame(fps);
     }
 
     window.requestAnimationFrame(() => {
-      this._lastTimestamp = window.performance.now();
+      this._lastTimestamp = now - (elapsed % interval);
+
       this.update();
     });
   }

@@ -48,8 +48,23 @@ export class Grid extends Entity {
         y * (size + offset) + offset
       );
       const end = new Vector2D(start.x + size, start.y + size);
-      const node = new Tile(start, end, new Vector2D(x, y));
-      this._tiles.push(node);
+      const tile = new Tile(start, end, new Vector2D(x, y));
+      const top =
+        tile.location.y > 0
+          ? this._tiles.at(tile.index - Settings.grid.dimension)
+          : null;
+      const left = tile.location.x > 0 ? this._tiles.at(tile.index - 1) : null;
+      // 0: top, 1: right, 2: bottom, 3: left,
+      if (top) {
+        // Bottom
+        tile.neighbors[0] = top;
+        top.neighbors[2] = tile;
+      }
+      if (left) {
+        tile.neighbors[3] = left;
+        left.neighbors[1] = tile;
+      }
+      this._tiles.push(tile);
     }
   }
 }

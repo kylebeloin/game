@@ -13,6 +13,10 @@ export class Actor extends Entity {
     return this.getComponent(ActorLocomotionComponent).position;
   }
 
+  public get lastPosition(): Vector2D | null {
+    return this.getComponent(ActorLocomotionComponent).lastPosition;
+  }
+
   public get locomotion(): ActorLocomotionComponent {
     return this.getComponent(ActorLocomotionComponent);
   }

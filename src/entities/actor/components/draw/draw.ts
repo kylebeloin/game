@@ -1,5 +1,5 @@
-import { Vector2D, CanvasLayer } from "@/utils";
-import { Actor } from "@/entities/actor";
+import { Vector2D, CanvasLayer, logger } from "@/utils";
+import { Actor } from "@/entities";
 import { Team } from "@/team";
 import { Settings } from "@/settings";
 import { DrawComponent } from "@/components";
@@ -15,6 +15,7 @@ export class ActorDrawComponent extends DrawComponent<Actor> {
     this.draw();
   }
 
+  @logger
   public awake(): void {
     if (this.position) this.clear();
   }
@@ -31,6 +32,15 @@ export class ActorDrawComponent extends DrawComponent<Actor> {
   }
 
   protected clear(): void {
+    if (this.entity.lastPosition) {
+      CanvasLayer.Foreground.clearRect(
+        new Vector2D(
+          this.entity.lastPosition.x - Settings.grid.tileSize / 2,
+          this.entity.lastPosition.y - Settings.grid.tileSize / 2
+        ),
+        new Vector2D(Settings.grid.tileSize, Settings.grid.tileSize)
+      );
+    }
     CanvasLayer.Foreground.clearRect(
       new Vector2D(
         this.position.x - Settings.grid.tileSize / 2,

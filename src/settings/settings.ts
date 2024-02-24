@@ -1,6 +1,9 @@
 import { Color } from "../utils/presentation/color";
 
 export const Settings = Object.freeze({
+  game: {
+    fps: 60,
+  },
   debug: {
     enabled: true,
     text: {
@@ -24,6 +27,11 @@ export const Settings = Object.freeze({
     colors: {
       a: new Color(187, 222, 251, 1),
       b: new Color(255, 236, 179, 1),
+    },
+  },
+  player: {
+    animation: {
+      walk: 30,
     },
   },
 });

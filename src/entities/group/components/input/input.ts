@@ -21,14 +21,14 @@ export class GroupInputComponent
     for (const entity of this.entity.actors) {
       if (!entity.hasComponent(OnKeyPressComponent<Player>)) continue;
 
-      entity.getComponent(OnKeyPressComponent<Player>).keyDown(e);
+      entity.getComponent(OnKeyPressComponent<Player>).keyDown(e.key);
     }
   }
 
   public handleKeyUp(e: KeyboardEvent): void {
     for (const entity of this.entity.actors) {
       if (!entity.hasComponent(OnKeyPressComponent)) continue;
-      entity.getComponent(OnKeyPressComponent).keyUp(e);
+      entity.getComponent(OnKeyPressComponent).keyUp(e.key);
     }
   }
 }

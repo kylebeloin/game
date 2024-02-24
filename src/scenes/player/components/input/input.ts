@@ -1,6 +1,6 @@
 import { OnKeyPressComponent } from "@/components";
 import type { Player } from "@/scenes";
-import { Directions, Vector2D } from "@/utils";
+import { DirectionalKeys, Direction, logger } from "@/utils";
 
 export class PlayerInputComponent extends OnKeyPressComponent<Player> {
   public entity!: Player;
@@ -9,32 +9,33 @@ export class PlayerInputComponent extends OnKeyPressComponent<Player> {
     super();
   }
 
-  public keys = new Set<string>(Object.values(Directions));
+  public keys = new Set<string>(Object.values(DirectionalKeys));
 
   public keysPressed = new Set<string>();
 
-  public keyDown(e: KeyboardEvent): void {
-    super.keyDown(e);
-    switch (e.key) {
-      case Directions.Up:
-        this.entity.transform.translate(new Vector2D(0, -1));
+  @logger
+  public keyDown(key: string): void {
+    super.keyDown(key);
+    switch (key) {
+      case DirectionalKeys.Up:
+        this.entity.move(Direction.Up);
         break;
-      case Directions.Down:
-        this.entity.transform.translate(new Vector2D(0, 1));
+      case DirectionalKeys.Down:
+        this.entity.move(Direction.Down);
         break;
-      case Directions.Left:
-        this.entity.transform.translate(new Vector2D(-1, 0));
+      case DirectionalKeys.Left:
+        this.entity.move(Direction.Left);
         break;
-      case Directions.Right:
-        this.entity.transform.translate(new Vector2D(1, 0));
+      case DirectionalKeys.Right:
+        this.entity.move(Direction.Right);
         break;
       default:
         break;
     }
   }
 
-  public keyUp(e: KeyboardEvent): void {
-    super.keyUp(e);
+  public keyUp(key: string): void {
+    super.keyUp(key);
   }
 
   public awake(): void {}

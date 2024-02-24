@@ -30,7 +30,7 @@ export class Tile extends Entity {
     /**
      * Neighbors of the current tile.
      */
-    public readonly neighbors: Array<Tile> = []
+    public readonly neighbors: Array<Tile> = new Array(4)
   ) {
     super();
   }

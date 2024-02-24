@@ -1,4 +1,5 @@
 import { IAwake, Vector2D, Color } from "../..";
+import { entrypoint } from "../../entrypoint";
 
 export class Canvas implements IAwake {
   private _element!: HTMLCanvasElement;
@@ -19,6 +20,10 @@ export class Canvas implements IAwake {
     this._ctx.fillStyle = color.asString();
     this._ctx.rect(start.x, start.y, size.x, size.y);
     this._ctx.fill();
+  }
+
+  public clear() {
+    this._ctx.clearRect(0, 0, this._ctx.canvas.width, this._ctx.canvas.height);
   }
 
   public clearRect(start: Vector2D, size: Vector2D): void {
@@ -51,7 +56,7 @@ export class Canvas implements IAwake {
     canvas.setAttribute("width", `${this.size.x}px`);
     canvas.setAttribute("height", `${this.size.y}px`);
 
-    document.body.appendChild(canvas);
+    entrypoint.appendChild(canvas);
     this._element = canvas;
 
     const ctx = this._element.getContext("2d");

@@ -1,6 +1,7 @@
 import { Game, Grid } from "@/entities";
 import { CanvasLayer, Vector2D } from "@/utils";
 import { OnClickComponent } from "@/components";
+import { logger } from "@/utils";
 
 import { InputComponent, IClickInputComponent } from "@/components";
 
@@ -10,6 +11,7 @@ export class GameInputComponent
 {
   public entity!: Game;
 
+  @logger
   public awake(): void {
     document.body.addEventListener("click", this.handleClick.bind(this));
   }

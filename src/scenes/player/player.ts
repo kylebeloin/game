@@ -1,12 +1,8 @@
 import { Actor, Group, Tile } from "@/entities";
 import { PlayerTransformComponent, PlayerInputComponent } from "./components";
-import { Vector2D } from "@/utils";
+import { Direction, logger } from "@/utils";
 
 export class Player extends Actor {
-  public get position(): Vector2D | null {
-    return this.transform.position;
-  }
-
   public get transform(): PlayerTransformComponent {
     return this.getComponent(PlayerTransformComponent);
   }
@@ -16,12 +12,22 @@ export class Player extends Actor {
     this.addComponent(new PlayerTransformComponent(tile.center));
   }
 
+  @logger
   public awake(): void {
     this.addComponent(new PlayerInputComponent());
     super.awake();
   }
 
-  public update(_: number): void {
-    super.update(_);
+  public update(delta: number): void {
+    super.update(delta);
+  }
+
+  @logger
+  public move(direction: Direction) {
+    const next = this.locomotion.tile?.neighbors[direction];
+    if (next) {
+      this.transform.translate(next.center);
+      this.locomotion.tile = next;
+    }
   }
 }

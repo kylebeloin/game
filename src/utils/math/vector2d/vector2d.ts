@@ -1,4 +1,5 @@
 import { lerp } from "../lerp";
+import { toRounded } from "..";
 
 type Vector2DStr = `(${number},${number})`;
 
@@ -14,6 +15,11 @@ export class Vector2D {
 
   public static sub = (v1: Vector2D, v2: Vector2D) =>
     new Vector2D(v1.x - v2.x, v1.y - v2.y);
+
+  public static direction = (start: Vector2D, end: Vector2D) => {
+    const deg = Math.atan((end.y - start.y) / (end.x - start.x));
+    return toRounded(deg, 2);
+  };
 
   add(vector: Vector2D): void {
     this.x += vector.x;

@@ -9,11 +9,13 @@ export abstract class TransformComponent<T extends Entity>
   public abstract get rotation(): number | null;
   public abstract set rotation(value: number | null);
   public abstract get scale(): Vector2D | null;
+  public abstract direction: number | null;
 
   public abstract awake(): void;
   public abstract update(_: number): void;
 
   public translate(vector: Vector2D): void {
+    this.direction = Vector2D.direction(this.position!, vector);
     this.position!.add(vector);
   }
 
