@@ -1,3 +1,5 @@
+export type ClassConstructor = new (...args: any[]) => {};
+
 export type AbstractComponent<T> = Function & { prototype: T };
 export type InstanceConstructor<T> = { new (...args: unknown[]): T };
 
@@ -16,3 +18,5 @@ export function isInstanceConstructor<T>(
 ): constructor is InstanceConstructor<T> {
   return constructor.prototype === undefined;
 }
+
+export type Nullable<T> = T | null;

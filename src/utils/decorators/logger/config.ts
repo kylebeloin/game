@@ -38,8 +38,8 @@ export const config: Record<string, LogConfigEntry> = {
     default: {
       height: 200,
       start: new Vector2D(0, 250),
-      transform: (str: string) => `Default: ${str}`,
-      type: LogType.Single,
+      transform: (str: string) => `${str}`,
+      type: LogType.Queue,
     },
   },
 };

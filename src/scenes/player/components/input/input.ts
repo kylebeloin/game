@@ -9,7 +9,7 @@ export class PlayerInputComponent extends OnKeyPressComponent<Player> {
     super();
   }
 
-  public keys = new Set<string>(Object.values(DirectionalKeys));
+  public keys = new Set<string>([...Object.values(DirectionalKeys), "Shift"]);
 
   public keysPressed = new Set<string>();
 
