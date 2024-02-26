@@ -19,6 +19,10 @@ export class PlayerTransformComponent extends TransformComponent<Player> {
     return this._position;
   }
 
+  public set position(value: Vector2D) {
+    this._position = value;
+  }
+
   public get rotation(): number {
     return this._rotation;
   }

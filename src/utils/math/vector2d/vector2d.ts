@@ -21,6 +21,9 @@ export class Vector2D {
     return toRounded(deg, 2);
   };
 
+  public static multiply = (v1: Vector2D, v2: Vector2D) =>
+    new Vector2D(v1.x * v2.x, v1.y * v2.y);
+
   add(vector: Vector2D): void {
     this.x += vector.x;
     this.y += vector.y;
