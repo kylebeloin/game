@@ -62,7 +62,7 @@ export class PlayerTransformAnimateComponent extends PlayerTransformComponent {
     if (!this._next) return;
     if (this._translating) {
       this._elapsed += delta;
-      const progress = this._elapsed / this._duration;
+      const progress = this._elapsed / (this._duration * this.entity.speed);
       // If the progress is greater than or equal to 1, the next location is reached.
       if (progress >= 1) {
         return this.complete();

@@ -26,3 +26,13 @@ export const PlayerMoveToRun: ITransition<Player> = {
     );
   },
 };
+
+export const PlayerRunToMove: ITransition<Player> = {
+  target: PlayerStateTypes.Moving,
+  check: function () {
+    return (
+      !this.getComponent(PlayerInputComponent).pressed.has("Shift") &&
+      this.transform.translating
+    );
+  },
+};

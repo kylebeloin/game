@@ -1,5 +1,6 @@
 import { IAction } from "@/utils";
 import { Player } from "..";
+import { Settings } from "@/settings";
 
 export const PlayerMoveEnter: IAction<Player> = {
   execute: function (_) {
@@ -38,18 +39,20 @@ export const PlayerIdleUpdate: IAction<Player> = {
 // Running state actions
 export const PlayerRunEnter: IAction<Player> = {
   execute: function (_) {
-    console.log("Player run start:", this.components);
+    this.speed = 0.75;
+    this.animation.start();
   },
 };
 
 export const PlayerRunExit: IAction<Player> = {
   execute: function (_) {
-    console.log("Player run exit:", this.components);
+    this.speed = Settings.player.speed;
   },
 };
 
 export const PlayerRunUpdate: IAction<Player> = {
   execute: function (_) {
-    console.log("Player run update:", this.components);
+    if (!this.animation.playing) this.animation.start();
+    this.move();
   },
 };

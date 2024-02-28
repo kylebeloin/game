@@ -39,7 +39,10 @@ export class PlayerRunningState extends State<Player> {
 
     this.enter = [Actions.PlayerRunEnter];
     this.exit = [Actions.PlayerRunExit];
-    this.update = [];
-    this.transitions = [Transitions.PlayerMoveToIdle];
+    this.update = [Actions.PlayerRunUpdate];
+    this.transitions = [
+      Transitions.PlayerMoveToIdle,
+      Transitions.PlayerRunToMove,
+    ];
   }
 }

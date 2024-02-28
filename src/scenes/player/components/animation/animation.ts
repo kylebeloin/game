@@ -16,7 +16,7 @@ export class PlayerAnimationComponent extends AnimatorComponent<Player> {
   }
 
   public get clip() {
-    return this._clips.get(this.state.owner.direction!);
+    return this._clips.get(this.entity.direction!);
   }
 
   public get currentFrame() {
@@ -64,6 +64,6 @@ export class PlayerAnimationComponent extends AnimatorComponent<Player> {
 
   public update(deltaTime: number) {
     if (!this.loaded) return;
-    this.clip?.update(deltaTime);
+    this.clip?.update(deltaTime, this.entity.speed);
   }
 }

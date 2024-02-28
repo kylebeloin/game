@@ -34,5 +34,6 @@ export const Settings = Object.freeze({
       walk: 100,
       transition: 300,
     },
+    speed: 1,
   },
 });

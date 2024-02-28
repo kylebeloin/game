@@ -7,12 +7,22 @@ import {
 } from "./components";
 import { Direction, Stateful } from "@/utils";
 import { PlayerStateMachine } from "./state";
+import { Settings } from "@/settings";
 
 export class Player extends Actor implements Stateful<Player> {
   private _direction: Direction = Direction.Down;
+  private _speed: number = Settings.player.speed;
 
   public get direction(): Direction {
     return this._direction;
+  }
+
+  public get speed(): number {
+    return this._speed;
+  }
+
+  public set speed(value: number) {
+    this._speed = value;
   }
 
   public get input(): PlayerInputComponent {

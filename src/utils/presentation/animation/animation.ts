@@ -1,13 +1,21 @@
 import { IAwake, IUpdate } from "@/utils";
-import { logger } from "@/utils";
 
 export class Animation implements IAwake, IUpdate {
   private _start: number = 0;
   private _playing: boolean = false;
   private _step: number = 0;
+  private _speed: number = 1;
 
   public get playing(): boolean {
     return this._playing;
+  }
+
+  public get speed(): number {
+    return this._speed;
+  }
+
+  public set speed(value: number) {
+    this._speed = value;
   }
 
   public frame: ImageBitmap | null = null;
@@ -39,12 +47,12 @@ export class Animation implements IAwake, IUpdate {
    *
    * @param delta Time since last update
    */
-  public update(delta: number): void {
+  public update(delta: number, speed: number = this.speed): void {
     /**
      * Is delta
      */
     if (!this._playing) return;
-    const interval = this.interval;
+    const interval = this.interval * speed;
     const elapsed = this._start + delta;
     if (elapsed > interval) {
       if (this._step >= this._frames.length) {
