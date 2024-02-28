@@ -31,7 +31,8 @@ export const Settings = Object.freeze({
   },
   player: {
     animation: {
-      walk: 30,
+      walk: 100,
+      transition: 300,
     },
   },
 });

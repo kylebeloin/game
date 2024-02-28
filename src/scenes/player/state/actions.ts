@@ -3,25 +3,24 @@ import { Player } from "..";
 
 export const PlayerMoveEnter: IAction<Player> = {
   execute: function (_) {
-    console.log("Player walk enter:", this.components);
+    this.animation.start();
   },
 };
 
 export const PlayerMoveExit: IAction<Player> = {
-  execute: function (_) {
-    console.log("Player walk exit:", this.components);
-  },
+  execute: function (_) {},
 };
 
 export const PlayerMoveUpdate: IAction<Player> = {
   execute: function (_) {
-    console.log("Player walk update:", this.components);
+    if (!this.animation.playing) this.animation.start();
+    this.move();
   },
 };
 
 export const PlayerIdleEnter: IAction<Player> = {
   execute: function (_) {
-    console.log("Player idle start:", this.components);
+    this.animation.stop();
   },
 };
 

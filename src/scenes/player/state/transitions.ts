@@ -6,14 +6,14 @@ import { PlayerInputComponent } from "../components";
 export const PlayerIdleToMove: ITransition<Player> = {
   target: PlayerStateTypes.Moving,
   check: function () {
-    return this.getComponent(PlayerInputComponent).keysPressed.has("Shift");
+    return this.transform.translating;
   },
 };
 
 export const PlayerMoveToIdle: ITransition<Player> = {
   target: PlayerStateTypes.Idle,
   check: function () {
-    return !this.getComponent(PlayerInputComponent).keysPressed.has("Shift");
+    return !this.input.pressed.size && !this.transform.translating;
   },
 };
 
@@ -22,7 +22,7 @@ export const PlayerMoveToRun: ITransition<Player> = {
   check: function () {
     return (
       this.state.current?.type === PlayerStateTypes.Moving &&
-      this.getComponent(PlayerInputComponent).keysPressed.has("Shift")
+      this.getComponent(PlayerInputComponent).pressed.has("Shift")
     );
   },
 };

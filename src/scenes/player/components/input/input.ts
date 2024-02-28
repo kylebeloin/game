@@ -11,22 +11,23 @@ export class PlayerInputComponent extends OnKeyPressComponent<Player> {
 
   public keys = new Set<string>([...Object.values(DirectionalKeys), "Shift"]);
 
-  public keysPressed = new Set<string>();
+  public pressed = new Set<string>();
 
   @logger
   public keyDown(key: string): void {
+    if (this.pressed.has(key)) return;
     super.keyDown(key);
     switch (key) {
-      case DirectionalKeys.Up:
+      case DirectionalKeys[Direction.Up]:
         this.entity.move(Direction.Up);
         break;
-      case DirectionalKeys.Down:
+      case DirectionalKeys[Direction.Down]:
         this.entity.move(Direction.Down);
         break;
-      case DirectionalKeys.Left:
+      case DirectionalKeys[Direction.Left]:
         this.entity.move(Direction.Left);
         break;
-      case DirectionalKeys.Right:
+      case DirectionalKeys[Direction.Right]:
         this.entity.move(Direction.Right);
         break;
       default:

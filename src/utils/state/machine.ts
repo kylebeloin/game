@@ -1,6 +1,7 @@
 import { IUpdate, Nullable } from "@/utils";
 import { IAction } from "./state.h";
 import { State } from "./state";
+import { logger } from "@/utils";
 
 export abstract class StateMachine<T, U extends State<T> = State<T>>
   implements IUpdate
@@ -40,7 +41,7 @@ export abstract class StateMachine<T, U extends State<T> = State<T>>
     this._deltaTime = deltaTime;
     if (!this._running || !this.current) return;
 
-    this.checkNext();
+    this.transition();
     this.do(this.current.update);
   }
 
@@ -63,7 +64,7 @@ export abstract class StateMachine<T, U extends State<T> = State<T>>
     }
   }
 
-  public checkNext(): void {
+  public transition(): void {
     if (!this.current) return;
 
     for (const transition of this.current.transitions) {
@@ -74,6 +75,7 @@ export abstract class StateMachine<T, U extends State<T> = State<T>>
     }
   }
 
+  @logger
   public next(state: Nullable<State<T>>): void {
     if (!this.current) return;
     this.do(this.current.exit);

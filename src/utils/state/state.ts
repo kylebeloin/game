@@ -59,4 +59,8 @@ export class State<T> implements IState<T> {
       value[i].check.bind(this._machine.owner);
     }
   }
+
+  public toString(): string {
+    return `${this.constructor.name}`;
+  }
 }

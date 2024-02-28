@@ -1,4 +1,3 @@
-import type { State } from "./state";
 import type { StateMachine } from ".";
 
 export interface IAction<T> {

@@ -22,6 +22,10 @@ export class Canvas implements IAwake {
     this._ctx.fill();
   }
 
+  public drawImage(image: ImageBitmap, position: Vector2D): void {
+    this._ctx.drawImage(image, position.x, position.y);
+  }
+
   public clear() {
     this._ctx.clearRect(0, 0, this._ctx.canvas.width, this._ctx.canvas.height);
   }

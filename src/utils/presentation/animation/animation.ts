@@ -1,12 +1,16 @@
 import { IAwake, IUpdate } from "@/utils";
-import { Settings } from "@/settings";
+import { logger } from "@/utils";
 
 export class Animation implements IAwake, IUpdate {
   private _start: number = 0;
+  private _playing: boolean = false;
+  private _step: number = 0;
 
-  private _last: number = 0;
+  public get playing(): boolean {
+    return this._playing;
+  }
 
-  public frame: IteratorResult<ImageBitmap> | null = null;
+  public frame: ImageBitmap | null = null;
 
   public constructor(
     /**
@@ -23,19 +27,14 @@ export class Animation implements IAwake, IUpdate {
   public awake(): void {}
 
   public start(): void {
+    this._playing = true;
     this._start = 0;
   }
 
-  public *frames(): IterableIterator<ImageBitmap> {
-    if (this._frames.length)
-      for (let i = 0; ; i++) {
-        if (i === this._frames.length && !this.duration) {
-          i = 0;
-        }
-        yield this._frames[i];
-      }
+  public stop(): void {
+    this.frame = this._frames[0];
+    this._playing = false;
   }
-
   /**
    *
    * @param delta Time since last update
@@ -44,9 +43,16 @@ export class Animation implements IAwake, IUpdate {
     /**
      * Is delta
      */
-    const interval = 1000 / this.interval;
-    if (delta > interval) {
-      this.frame = this.frames().next();
+    if (!this._playing) return;
+    const interval = this.interval;
+    const elapsed = this._start + delta;
+    if (elapsed > interval) {
+      if (this._step >= this._frames.length) {
+        this._step = 0;
+      }
+      this.frame = this._frames[this._step++];
+      return this.start();
     }
+    this._start = elapsed;
   }
 }

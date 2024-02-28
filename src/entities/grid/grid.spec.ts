@@ -8,6 +8,9 @@ describe(">>> Grid", () => {
 
   beforeEach(() => {
     grid = new Grid();
+    document.querySelector = jest.fn().mockImplementationOnce(() => {
+      return document.createElement("canvas");
+    });
   });
 
   it("should awake and update all children", () => {

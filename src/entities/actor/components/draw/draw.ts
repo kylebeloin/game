@@ -4,7 +4,9 @@ import { Team } from "@/team";
 import { Settings } from "@/settings";
 import { DrawComponent } from "@/components";
 
-export class ActorDrawComponent extends DrawComponent<Actor> {
+export class ActorDrawComponent<
+  T extends Actor = Actor
+> extends DrawComponent<T> {
   private get position(): Vector2D {
     return this.entity.position!;
   }

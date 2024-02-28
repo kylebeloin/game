@@ -1,6 +1,8 @@
+import { Direction } from "..";
+
 export const DirectionalKeys = {
-  Up: "ArrowUp" || "w",
-  Down: "ArrowDown" || "s",
-  Left: "ArrowLeft" || "a",
-  Right: "ArrowRight" || "d",
+  [Direction.Up]: "ArrowUp" || "w",
+  [Direction.Down]: "ArrowDown" || "s",
+  [Direction.Left]: "ArrowLeft" || "a",
+  [Direction.Right]: "ArrowRight" || "d",
 };

@@ -3,7 +3,7 @@ import { Entity } from "@/systems";
 
 import { Tile } from "@/entities/tile";
 import { Group } from "@/entities/group";
-import { ActorDrawComponent, ActorLocomotionComponent } from "./components";
+import { ActorLocomotionComponent } from "./components";
 
 /**
  * Actors handle collision and drawing against background layer.
@@ -27,7 +27,6 @@ export class Actor extends Entity {
   }
 
   public awake(): void {
-    this.addComponent(new ActorDrawComponent());
     super.awake();
   }
 }

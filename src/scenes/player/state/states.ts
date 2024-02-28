@@ -24,7 +24,7 @@ export class PlayerMovingState extends State<Player> {
 
     this.enter = [Actions.PlayerMoveEnter];
     this.exit = [Actions.PlayerMoveExit];
-    this.update = [];
+    this.update = [Actions.PlayerMoveUpdate];
     this.transitions = [
       Transitions.PlayerMoveToIdle,
       Transitions.PlayerMoveToRun,

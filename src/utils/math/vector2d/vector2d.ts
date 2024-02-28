@@ -21,6 +21,12 @@ export class Vector2D {
     return toRounded(deg, 2);
   };
 
+  public static distance = (v1: Vector2D, v2: Vector2D) => {
+    const x = v2.x - v1.x;
+    const y = v2.y - v1.y;
+    return Math.sqrt(x * x + y * y);
+  };
+
   public static multiply = (v1: Vector2D, v2: Vector2D) =>
     new Vector2D(v1.x * v2.x, v1.y * v2.y);
 

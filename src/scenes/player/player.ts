@@ -1,19 +1,38 @@
 import { Actor, Group, Tile } from "@/entities";
-import { PlayerTransformComponent, PlayerInputComponent } from "./components";
+import {
+  PlayerTransformAnimateComponent,
+  PlayerInputComponent,
+  PlayerAnimationComponent,
+  PlayerDrawComponent,
+} from "./components";
 import { Direction, Stateful } from "@/utils";
 import { PlayerStateMachine } from "./state";
-import { PlayerStateTypes } from "./state/types";
 
 export class Player extends Actor implements Stateful<Player> {
-  public get transform(): PlayerTransformComponent {
-    return this.getComponent(PlayerTransformComponent);
+  private _direction: Direction = Direction.Down;
+
+  public get direction(): Direction {
+    return this._direction;
+  }
+
+  public get input(): PlayerInputComponent {
+    return this.getComponent(PlayerInputComponent);
+  }
+
+  public get transform(): PlayerTransformAnimateComponent {
+    return this.getComponent(PlayerTransformAnimateComponent);
+  }
+
+  public get animation(): PlayerAnimationComponent {
+    return this.getComponent(PlayerAnimationComponent);
   }
 
   public state!: PlayerStateMachine;
 
   constructor(public readonly factory: Group, tile: Tile) {
     super(factory, tile);
-    this.addComponent(new PlayerTransformComponent(tile.center));
+    this.addComponent(new PlayerTransformAnimateComponent(tile.center));
+    this.addComponent(new PlayerDrawComponent());
   }
 
   public get position() {
@@ -21,10 +40,11 @@ export class Player extends Actor implements Stateful<Player> {
   }
 
   public awake(): void {
+    this.state = new PlayerStateMachine(this);
     this.addComponent(new PlayerInputComponent());
+    this.addComponent(new PlayerAnimationComponent(this.state));
     super.awake();
 
-    this.state = new PlayerStateMachine(this);
     this.state.start();
   }
 
@@ -33,13 +53,11 @@ export class Player extends Actor implements Stateful<Player> {
     this.state.update(delta);
   }
 
-  public move(direction: Direction) {
+  public move(direction: Direction = this._direction) {
+    this._direction = direction;
+    if (this.transform.translating) return;
     let next = this.locomotion.tile?.neighbors[direction];
-    if (this.state?.current?.type === PlayerStateTypes.Running) {
-      next =
-        this.locomotion.tile?.neighbors[direction]?.neighbors[direction] ??
-        next;
-    }
+
     if (next) {
       this.transform.position = next.center;
       this.locomotion.tile = next;
