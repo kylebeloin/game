@@ -1,11 +1,6 @@
-import { Entity, IComponent } from "@/systems";
+import { Entity, Component } from "@/systems";
 import { StateMachine } from "@/utils";
 
-export abstract class AnimatorComponent<T extends Entity>
-  implements IComponent
-{
-  public entity!: T;
-  public abstract awake(): void;
-  public abstract update(deltaTime: number): void;
+export abstract class AnimatorComponent<T extends Entity> extends Component<T> {
   public abstract state: StateMachine<T>;
 }

@@ -3,8 +3,6 @@ import type { Player } from "@/scenes";
 import { DirectionalKeys, Direction, logger } from "@/utils";
 
 export class PlayerInputComponent extends OnKeyPressComponent<Player> {
-  public entity!: Player;
-
   constructor() {
     super();
   }

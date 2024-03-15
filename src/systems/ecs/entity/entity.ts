@@ -1,4 +1,4 @@
-import { IComponent } from "../component.h";
+import { IComponent } from "../component/component.h";
 import { IEntity } from "./entity.h";
 import {
   Constructor,
@@ -9,8 +9,9 @@ import {
 import registry from "./registry";
 
 export abstract class Entity implements IEntity {
-  public get id() {
-    return registry.get(this).id;
+  private _id: string = window.crypto.randomUUID();
+  public get id(): string {
+    return this._id;
   }
 
   constructor() {
@@ -61,10 +62,7 @@ export abstract class Entity implements IEntity {
     component: C | InstanceConstructor<C>
   ): C {
     if (typeof component === "function") component = new component();
-    this._components.set(
-      component.constructor as Constructor<IComponent>,
-      component
-    );
+    this._components.set(component.constructor, component);
     component.entity = this;
     return component;
   }

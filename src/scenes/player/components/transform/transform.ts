@@ -13,8 +13,6 @@ export class PlayerTransformComponent extends TransformComponent<Player> {
   public awake(): void {}
   public update(_: number): void {}
 
-  public entity!: Player;
-
   public get position(): Vector2D {
     return this._position;
   }

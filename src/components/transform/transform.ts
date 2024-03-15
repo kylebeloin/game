@@ -1,10 +1,9 @@
-import { IComponent, Entity } from "@/systems";
+import { Component, Entity } from "@/systems";
 import { Vector2D } from "@/utils";
 
-export abstract class TransformComponent<T extends Entity>
-  implements IComponent
-{
-  public abstract entity: T;
+export abstract class TransformComponent<
+  T extends Entity
+> extends Component<T> {
   public abstract get position(): Vector2D | null;
   public abstract set position(value: Vector2D | null);
   public abstract get rotation(): number | null;

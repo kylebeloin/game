@@ -1,5 +1,5 @@
 import { Entity } from "./entity";
-import { IComponent } from "../component.h";
+import { IComponent } from "../component/component.h";
 
 describe("Entity", () => {
   class E extends Entity {}

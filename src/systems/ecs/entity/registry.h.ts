@@ -1,7 +1,8 @@
 import type { InstanceMap } from "@/utils";
 import type { IComponent } from "@/systems";
+import type { Entity } from "./entity";
 
 export interface IRegisteredEntity {
-  id: number;
+  entity: Entity;
   components: InstanceMap<IComponent>;
 }

@@ -11,7 +11,6 @@ export class ActorLocomotionComponent extends LocomotionComponent<Actor> {
     this._tile = tile;
   }
 
-  public entity!: Actor;
   /**
    * It is possible for an actor to stand nowhere; in this case, it is null.
    */

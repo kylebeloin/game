@@ -1,2 +1,2 @@
 export * from "./entity/entity";
-export * from "./component.h";
+export * from "./component";

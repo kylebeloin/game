@@ -1,15 +1,10 @@
-import { Entity } from "@/systems";
+import { Entity, Component } from "@/systems";
 import { IOnKeyPressComponent } from "./onkeypress.h";
 
 export abstract class OnKeyPressComponent<T extends Entity>
+  extends Component<T>
   implements IOnKeyPressComponent
 {
-  public abstract entity: T;
-
-  public abstract awake(): void;
-
-  public abstract update(_: number): void;
-
   public abstract keys: Set<string>;
 
   public abstract pressed: Set<string>;

@@ -1,11 +1,9 @@
-import type { IComponent } from "@/systems";
+import { Component } from "@/systems";
 import { CanvasLayer, Color, Vector2D } from "@/utils";
 import { Tile } from "@/entities/tile";
 import { Settings } from "@/settings";
 
-export class TileDrawComponent implements IComponent {
-  public entity!: Tile;
-
+export class TileDrawComponent extends Component<Tile> {
   public awake(): void {
     // to implement
     this.clear();

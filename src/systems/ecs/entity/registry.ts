@@ -2,8 +2,7 @@ import type { IRegisteredEntity } from "./registry.h";
 import type { Entity } from "..";
 
 let instance: EntityRegistry | null = null;
-let id = 0;
-let _registry = new Map<Entity, IRegisteredEntity>();
+let _registry = new Map<string, IRegisteredEntity>();
 // stores reference to entity id in _registry
 
 class EntityRegistry {
@@ -13,29 +12,34 @@ class EntityRegistry {
   }
 
   public register<E extends Entity>(entity: E): void {
-    _registry.set(entity, { id: id++, components: new Map() });
+    _registry.set(entity.id, { entity, components: new Map() });
   }
 
-  public get<E extends Entity>(entity: E | number): IRegisteredEntity {
-    if (typeof entity === "number") {
-      for (let [instance, registeredEntity] of _registry) {
-        if (registeredEntity.id === entity)
-          return this.get(instance) as IRegisteredEntity;
+  public get<E extends Entity>(entity: E | string): IRegisteredEntity {
+    if (typeof entity === "string") {
+      if (!_registry.has(entity)) {
+        throw new Error(
+          `Entity with id ${entity} does not exist or has been removed from registry.`
+        );
       }
-      throw new Error("Entity not found.");
+      return _registry.get(entity) as IRegisteredEntity;
+    } else {
+      const { id } = entity;
+      if (!_registry.has(id)) {
+        this.register(entity);
+      }
+      return _registry.get(id) as IRegisteredEntity;
     }
-    if (!_registry.has(entity)) {
-      this.register(entity);
-    }
-    return _registry.get(entity) as IRegisteredEntity;
   }
 
-  public has<E extends Entity>(entity: E): boolean {
-    return _registry.has(entity);
+  public has<E extends Entity>(value: E | string): boolean {
+    const id = typeof value === "string" ? value : value.id;
+    return _registry.has(id);
   }
 
-  public destroy<E extends Entity>(entity: E): void {
-    _registry.delete(entity);
+  public destroy<E extends Entity>(value: E | string): void {
+    const id = typeof value === "string" ? value : value.id;
+    _registry.delete(id);
   }
 }
 

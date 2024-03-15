@@ -9,8 +9,6 @@ export class GameInputComponent
   extends InputComponent<Game>
   implements IClickInputComponent
 {
-  public entity!: Game;
-
   @logger
   public awake(): void {
     document.body.addEventListener("click", this.handleClick.bind(this));

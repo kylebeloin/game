@@ -1,5 +1,3 @@
-import { IAwake, IUpdate } from "@/utils";
+import { IAwake, IUpdate, IRegisterable } from "@/utils";
 
-export interface IEntity extends IAwake, IUpdate {
-  readonly id: number;
-}
+export interface IEntity extends IAwake, IUpdate, IRegisterable {}

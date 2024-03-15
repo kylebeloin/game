@@ -5,3 +5,7 @@ export interface IUpdate {
 export interface IAwake {
   awake(): void;
 }
+
+export interface IRegisterable {
+  readonly id: string;
+}
